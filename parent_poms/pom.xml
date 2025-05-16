@@ -6,9 +6,48 @@
     <packaging>pom</packaging>
 
     <properties>
+        <!-- java -->
+        <java.version>17</java.version>
+
+        <!-- spring -->
+        <spring-boot.version>3.4.5</spring-boot.version>
+        <spring-cloud.version>2024.0.0</spring-cloud.version>
+        <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
+
+
+        <!-- Junit -->
+        <testcontainers-keycloak.version>3.7.0</testcontainers-keycloak.version>
+        <junit-jupiter.version>1.21.0</junit-jupiter.version>
     </properties>
 
     <dependencyManagement>
+
+        <dependencies>
+
+
+            <!-- spring -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
     </dependencyManagement>
 
 

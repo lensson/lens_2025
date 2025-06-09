@@ -9,8 +9,12 @@
 
 
     <modules>
-        <module>parent_poms</module>
+        <module>parent-poms</module>
+
+        <module>common</module>
         <module>platform</module>
+        <module>lens-blog</module>
+
     </modules>
 
 </project>

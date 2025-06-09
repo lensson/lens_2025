@@ -1,0 +1,7 @@
+{
+  "realm": "lens-realm",
+  "public_key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAs3kPIbD6k7VQGtCAfsJng+Yq1jF+2b8BBJ2bcfBE8SclhqAG4hkxcdpuDB4oSv++b5BjLDSFqXF6fh7Bg9Gionn+1Rm00DFFzVackBckbVSeDrLIrp8jokdpfMxLjEKtds7r3+dkNQcBhNVWShkGaBN8iw3Z9taJ2XOEwx9kJgB5vn3hJKoOpuqTtTtRP7ylIz1ESL5Abyn3HjhFZIoZtCYFVMIdNX2TRqFXMP2/W3byzfftEtIcOlOT/ZEKXC8dMXwHjRJxzBEIuGxw/R21wK7Z3Z22ZeSneueNW6TOw6o1KL46VEI8jvQf4ZGcZ4uts0y4KgriSP/Dyrevi4nxowIDAQAB",
+  "token-service": "http://172.28.0.1:28080/realms/lens-realm/protocol/openid-connect",
+  "account-service": "http://172.28.0.1:28080/realms/lens-realm/account",
+  "tokens-not-before": 0
+}

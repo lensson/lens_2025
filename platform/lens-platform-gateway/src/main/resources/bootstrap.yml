@@ -1,17 +1,13 @@
-server:
-  port: 8820
-
 spring:
   application:
     name: lens-platform-gateway
   cloud:
-    gateway:
-      default-filters:
-        - TokenRelay=
+    nacos:
+      discovery:
+        server-addr: ${nacos:localhost}:8848
+        metadata:
+          VERSION: 1.0
+      config:
+        server-addr: ${nacos:localhost}:8848
+        file-extension: yaml
 
-
-
-logging.level:
-  org.springframework.cloud.gateway: DEBUG
-  org.springframework.security: DEBUG
-  org.springframework.web.reactive.function.client: TRACE

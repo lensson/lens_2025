@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.lens</groupId>
+        <artifactId>parent-pom</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../parent-poms/pom.xml</relativePath>
+    </parent>
+
+    <groupId>com.lens</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>lens_2025/common</name>
+    <description>Common root pom</description>
+    <artifactId>common</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <!--
+        <module>lens-common-utils</module>
+        -->
+        <module>lens-common-base</module>
+
+        <module>lens-common-core</module>
+        <module>lens-common-web</module>
+
+        <module>lens-common-mariadb</module>
+        <module>lens-common-redis</module>
+
+    </modules>
+
+    <properties>
+
+    </properties>
+
+
+    <build>
+        <plugins>
+
+        </plugins>
+    </build>
+
+</project>

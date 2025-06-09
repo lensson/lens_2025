@@ -3,8 +3,8 @@
 
   <parent>
     <groupId>com.lens</groupId>
-    <artifactId>lens-root-pom</artifactId>
-    <relativePath>../parent_poms/pom.xml</relativePath>
+    <artifactId>parent-pom</artifactId>
+    <relativePath>../parent-poms/pom.xml</relativePath>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
@@ -17,7 +17,56 @@
 
   <modules>
     <module>lens-platform-gateway</module>
+    <module>lens-platform-auth</module>
+    <module>lens-platform-system</module>
+      <module>lens-platform-monitor</module>
   </modules>
 
+  <dependencies>
 
+    <!-- openAPI & Swagger-->
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.springfox</groupId>
+      <artifactId>springfox-boot-starter</artifactId>
+      <version>${swagger.starter.version}</version>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!--Docker maven plugin-->
+      <plugin>
+        <groupId>com.spotify</groupId>
+        <artifactId>dockerfile-maven-plugin</artifactId>
+        <version>${dockerfile.maven.version}</version>
+        <configuration>
+          <repository>${docker.image.prefix}/${project.artifactId}</repository>
+          <contextDirectory>./</contextDirectory>
+          <tag>latest</tag>
+          <buildArgs>
+            <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+          </buildArgs>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

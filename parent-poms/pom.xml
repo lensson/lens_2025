@@ -1,0 +1,169 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.lens</groupId>
+    <artifactId>parent-pom</artifactId>
+    <name>lens_2025/parent-poms</name>
+    <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <properties>
+
+        <project.version>1.0.0-SNAPSHOT</project.version>
+
+        <!-- source encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- java -->
+        <java.version>17</java.version>
+
+        <!-- maven -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+
+
+        <!-- common lib -->
+        <jakarta.validation-api.version>3.1.1</jakarta.validation-api.version>
+
+        <dyuproject.version>1.3.1</dyuproject.version>
+
+        <hutool.version>5.3.5</hutool.version>
+        <lombok.version>1.18.28</lombok.version>
+
+        <pagehelper.version>2.1.0</pagehelper.version>
+
+        <!-- JSON alibaba -->
+        <alibaba.fastjson.version>2.0.57</alibaba.fastjson.version>
+
+        <!-- JSON -->
+        <google.code.gson.version>2.13.0</google.code.gson.version>
+        <net.sf.json.lib.version>2.4</net.sf.json.lib.version>
+
+        <!-- Jackson JSON -->
+        <jackson.mapper.asl.version>1.9.13</jackson.mapper.asl.version>
+
+        <!-- 获取系统信息 -->
+        <!--<oshi.version>6.6.6</oshi.version>-->
+        <oshi.version>3.9.1</oshi.version>
+
+        <!-- very old version -->
+        <ip2region.version>1.7.2</ip2region.version>
+
+        <!-- swagger -->
+        <swagger.version>2.6.1</swagger.version>
+        <swagger.ui.version>2.6.1</swagger.ui.version>
+        <swagger.starter.version>3.0.0</swagger.starter.version>
+
+        <springdoc-openapi-starter-webmvc-ui.version>2.6.0</springdoc-openapi-starter-webmvc-ui.version>
+
+        <!-- spring -->
+        <spring-boot.version>3.4.5</spring-boot.version>
+        <spring-cloud.version>2024.0.0</spring-cloud.version>
+        <spring-boot-admin-starter-client.version>3.4.5</spring-boot-admin-starter-client.version>
+
+        <!-- spring alibaba -->
+        <druid.version>1.1.8</druid.version>
+        <spring-cloud-alibaba.version>2023.0.1.0</spring-cloud-alibaba.version>
+
+        <!-- spring mybatis -->
+        <mybatis-plus-boot-starter.version>3.5.10</mybatis-plus-boot-starter.version>
+
+        <!-- docker -->
+        <docker.image.prefix>lensson</docker.image.prefix>
+        <dockerfile.maven.version>1.4.10</dockerfile.maven.version>
+
+        <!-- Junit -->
+        <testcontainers-keycloak.version>3.7.0</testcontainers-keycloak.version>
+        <junit-jupiter.version>1.21.0</junit-jupiter.version>
+
+        <!-- web -->
+        <jjwt.version>0.12.6</jjwt.version>
+        <dom4j.version>1.6.1</dom4j.version>
+        <flexmark.version>0.64.8</flexmark.version>
+
+
+        <!-- 高版本Java(jdk17)需要 -->
+        <!-- servlet API -->
+        <servlet-api.version>4.0.1</servlet-api.version>
+
+        <bouncycastle.bcprov-jdk18on.version>1.80</bouncycastle.bcprov-jdk18on.version>
+
+        <commons-io.version>2.19.0</commons-io.version>
+
+        <aspectj.aspectjrt.version>1.5.4</aspectj.aspectjrt.version>
+    </properties>
+
+
+    <dependencies>
+
+        <!-- common lib -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <!--<optional>true</optional>-->
+        </dependency>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+
+
+        <!-- spring cloud alibaba -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <dependencyManagement>
+
+        <dependencies>
+
+
+            <!-- spring -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+
+
+</project>

@@ -22,14 +22,35 @@
 
         <dependency>
             <groupId>com.lens</groupId>
+            <artifactId>lens-common-web</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.lens</groupId>
             <artifactId>lens-common-mariadb</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.lens</groupId>
+            <artifactId>lens-common-redis</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+
 
         <!-- RabbitMq  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
+            <version>${jakarta.servlet-api.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

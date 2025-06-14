@@ -84,13 +84,18 @@
 
         <!-- 高版本Java(jdk17)需要 -->
         <!-- servlet API -->
-        <servlet-api.version>4.0.1</servlet-api.version>
+        <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
+        <jakarta.servlet-api.version>6.1.0</jakarta.servlet-api.version>
 
         <bouncycastle.bcprov-jdk18on.version>1.80</bouncycastle.bcprov-jdk18on.version>
 
         <commons-io.version>2.19.0</commons-io.version>
 
         <aspectj.aspectjrt.version>1.5.4</aspectj.aspectjrt.version>
+
+        <JustAuth.version>1.16.7</JustAuth.version>
+
+        <freemarker.version>2.3.34</freemarker.version>
     </properties>
 
 

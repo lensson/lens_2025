@@ -2,12 +2,12 @@ package com.lens.common.core.utils;
 
 
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.lionsoul.ip2region.*;
 import org.springframework.util.StringUtils;
 
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
@@ -115,6 +115,7 @@ public class IpUtils {
      * @return
      */
     public static Map<String, String> getOsAndBrowserInfo(HttpServletRequest request) {
+
         String browserDetails = request.getHeader("User-Agent");
         String userAgent = browserDetails;
         String user = userAgent.toLowerCase();

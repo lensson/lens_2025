@@ -1,6 +1,7 @@
 package com.lens.common.web.utils.upload;
 
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.fileupload.util.Streams;
@@ -9,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.support.StandardMultipartHttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
+
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;

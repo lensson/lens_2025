@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: lens-blog-admin-backend
+  cloud:
+    nacos:
+      discovery:
+        server-addr: ${lens-nacos:localhost}:8848
+        metadata:
+          VERSION: 1.0
+      config:
+        server-addr: ${lens-nacos:localhost}:8848
+        file-extension: yaml

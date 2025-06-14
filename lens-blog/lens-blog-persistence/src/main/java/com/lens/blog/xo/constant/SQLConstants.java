@@ -5,10 +5,9 @@ import com.lens.common.db.constant.BaseSQLConstants;
 /**
  * SQL字段常量
  *
- * @Author zhenac
- * @Created 6/2/25 9:28 AM
+ * @author 陌溪
+ * @date 2018年10月20日15:13:09
  */
-
 public final class SQLConstants extends BaseSQLConstants {
 
 

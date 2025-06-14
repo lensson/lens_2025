@@ -48,6 +48,12 @@
             <version>${mybatis-plus-boot-starter.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-jsqlparser</artifactId>
+            <version>${mybatis-plus-boot-starter.version}</version>
+        </dependency>
+
         <!-- 格式化对象，方便输出日志 -->
         <dependency>
             <groupId>com.alibaba</groupId>

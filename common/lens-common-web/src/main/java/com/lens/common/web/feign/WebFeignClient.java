@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Created 5/29/25 1:29 PM
  */
 
-@FeignClient(name = "mogu-web", configuration = FeignConfiguration.class)
+@FeignClient(name = "lens-blog-backend", configuration = FeignConfiguration.class)
 public interface WebFeignClient {
 
     /**

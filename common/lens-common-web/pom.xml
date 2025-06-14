@@ -68,11 +68,13 @@
 
         <!-- 高版本Java(jdk17)需要 -->
         <!-- servlet API -->
+        <!--
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>${servlet-api.version}</version>
+            <version>${javax.servlet-api.version}</version>
         </dependency>
+        -->
 
         <dependency>
             <groupId>javax.xml.bind</groupId>

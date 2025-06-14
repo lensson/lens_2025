@@ -1,10 +1,11 @@
 package com.lens.common.core.utils.wechat;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import javax.servlet.http.HttpServletRequest;
+
 import java.io.InputStream;
 import java.security.MessageDigest;
 import java.util.Arrays;

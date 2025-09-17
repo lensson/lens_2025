@@ -3,14 +3,13 @@ package com.lens.blog.admin.restapi;
 
 import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.constant.SysConstants;
-import com.lens.blog.xo.service.WebVisitService;
-
 import com.lens.blog.vo.WebVisitVO;
+import com.lens.blog.xo.service.WebVisitService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.GetList;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -26,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author 陌溪
  * @date 2019年5月17日08:38:09
  */
-@Api(value = "用户访问相关接口", tags = {"用户访问相关接口"})
+@Tag(name ="用户访问相关接口", description = "用户访问相关接口")
 
 @RestController
 @RequestMapping("/webVisit")
@@ -37,7 +36,7 @@ public class WebVisitRestApi {
     private WebVisitService webVisitService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取用户访问列表", notes = "获取用户访问列表")
+    @Operation(summary = "获取用户访问列表", description ="获取用户访问列表")
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class}) @RequestBody WebVisitVO webVisitVO, BindingResult result) {
 

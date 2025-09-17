@@ -1,20 +1,19 @@
 package com.lens.blog.admin.restapi;
 
 
-
 import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.annotion.AvoidRepeatableCommit.AvoidRepeatableCommit;
 import com.lens.blog.admin.annotion.OperationLogger.OperationLogger;
-import com.lens.blog.xo.service.BlogService;
 import com.lens.blog.vo.BlogVO;
+import com.lens.blog.xo.service.BlogService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.Delete;
 import com.lens.common.base.validator.group.GetList;
 import com.lens.common.base.validator.group.Insert;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -37,7 +36,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/blog")
-@Api(value = "博客相关接口", tags = {"博客相关接口"})
+@Tag(name = "博客相关接口", description = "博客相关接口")
 @Slf4j
 public class BlogRestApi {
 
@@ -45,7 +44,7 @@ public class BlogRestApi {
     private BlogService blogService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取博客列表", notes = "获取博客列表", response = String.class)
+    @Operation(summary = "获取博客列表", description = "获取博客列表")
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class}) @RequestBody BlogVO blogVO, BindingResult result) {
 
@@ -56,7 +55,7 @@ public class BlogRestApi {
     @AvoidRepeatableCommit
     @AuthorityVerify
     @OperationLogger(value = "增加博客")
-    @ApiOperation(value = "增加博客", notes = "增加博客", response = String.class)
+    @Operation(summary = "增加博客", description = "增加博客")
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody BlogVO blogVO, BindingResult result) {
 
@@ -67,7 +66,7 @@ public class BlogRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "本地博客上传")
-    @ApiOperation(value = "本地博客上传", notes = "本地博客上传", response = String.class)
+    @Operation(summary = "本地博客上传", description = "本地博客上传")
     @PostMapping("/uploadLocalBlog")
     public String uploadPics(@RequestBody List<MultipartFile> filedatas) throws IOException {
 
@@ -76,7 +75,7 @@ public class BlogRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "编辑博客")
-    @ApiOperation(value = "编辑博客", notes = "编辑博客", response = String.class)
+    @Operation(summary = "编辑博客", description = "编辑博客")
     @PostMapping("/edit")
     public String edit(@Validated({Update.class}) @RequestBody BlogVO blogVO, BindingResult result) {
 
@@ -87,7 +86,7 @@ public class BlogRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "推荐博客排序调整")
-    @ApiOperation(value = "推荐博客排序调整", notes = "推荐博客排序调整", response = String.class)
+    @Operation(summary = "推荐博客排序调整", description = "推荐博客排序调整")
     @PostMapping("/editBatch")
     public String editBatch(@RequestBody List<BlogVO> blogVOList) {
         return blogService.editBatch(blogVOList);
@@ -95,7 +94,7 @@ public class BlogRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "删除博客")
-    @ApiOperation(value = "删除博客", notes = "删除博客", response = String.class)
+    @Operation(summary = "删除博客", description = "删除博客")
     @PostMapping("/delete")
     public String delete(@Validated({Delete.class}) @RequestBody BlogVO blogVO, BindingResult result) {
         // 参数校验
@@ -105,7 +104,7 @@ public class BlogRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "删除选中博客")
-    @ApiOperation(value = "删除选中博客", notes = "删除选中博客", response = String.class)
+    @Operation(summary = "删除选中博客", description = "删除选中博客")
     @PostMapping("/deleteBatch")
     public String deleteBatch(@RequestBody List<BlogVO> blogVoList) {
         return blogService.deleteBatchBlog(blogVoList);

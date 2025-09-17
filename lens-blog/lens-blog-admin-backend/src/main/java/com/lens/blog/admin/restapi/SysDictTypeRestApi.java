@@ -4,16 +4,16 @@ package com.lens.blog.admin.restapi;
 import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.annotion.AvoidRepeatableCommit.AvoidRepeatableCommit;
 import com.lens.blog.admin.annotion.OperationLogger.OperationLogger;
-import com.lens.blog.xo.service.SysDictTypeService;
 import com.lens.blog.vo.SysDictTypeVO;
+import com.lens.blog.xo.service.SysDictTypeService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.Delete;
 import com.lens.common.base.validator.group.GetList;
 import com.lens.common.base.validator.group.Insert;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -34,7 +34,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysDictType")
-@Api(value = "字典类型相关接口", tags = {"字典类型相关接口"})
+@Tag(name ="字典类型相关接口", description = "字典类型相关接口")
 @Slf4j
 public class SysDictTypeRestApi {
 
@@ -42,7 +42,7 @@ public class SysDictTypeRestApi {
     private SysDictTypeService sysDictTypeService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取字典类型列表", notes = "获取字典类型列表", response = String.class)
+    @Operation(summary = "获取字典类型列表", description ="获取字典类型列表")
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class}) @RequestBody SysDictTypeVO sysDictTypeVO, BindingResult result) {
 
@@ -55,7 +55,7 @@ public class SysDictTypeRestApi {
     @AvoidRepeatableCommit
     @AuthorityVerify
     @OperationLogger(value = "增加字典类型")
-    @ApiOperation(value = "增加字典类型", notes = "增加字典类型", response = String.class)
+    @Operation(summary = "增加字典类型", description ="增加字典类型")
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody SysDictTypeVO sysDictTypeVO, BindingResult result) {
 
@@ -66,7 +66,7 @@ public class SysDictTypeRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "编辑字典类型")
-    @ApiOperation(value = "编辑字典类型", notes = "编辑字典类型", response = String.class)
+    @Operation(summary = "编辑字典类型", description ="编辑字典类型")
     @PostMapping("/edit")
     public String edit(HttpServletRequest request, @Validated({Update.class}) @RequestBody SysDictTypeVO sysDictTypeVO, BindingResult result) {
 
@@ -77,7 +77,7 @@ public class SysDictTypeRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "批量删除字典类型")
-    @ApiOperation(value = "批量删除字典类型", notes = "批量删除字典类型", response = String.class)
+    @Operation(summary = "批量删除字典类型", description ="批量删除字典类型")
     @PostMapping("/deleteBatch")
     public String delete(HttpServletRequest request, @Validated({Delete.class}) @RequestBody List<SysDictTypeVO> sysDictTypeVoList, BindingResult result) {
 

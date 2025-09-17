@@ -5,7 +5,13 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-
+import com.lens.blog.entity.Feedback;
+import com.lens.blog.entity.Link;
+import com.lens.blog.entity.SystemConfig;
+import com.lens.blog.entity.User;
+import com.lens.blog.vo.FeedbackVO;
+import com.lens.blog.vo.LinkVO;
+import com.lens.blog.vo.UserVO;
 import com.lens.blog.web.constant.MessageConstants;
 import com.lens.blog.web.constant.RedisConstants;
 import com.lens.blog.web.constant.SQLConstants;
@@ -13,9 +19,6 @@ import com.lens.blog.web.constant.SysConstants;
 import com.lens.blog.xo.service.*;
 import com.lens.blog.xo.utils.RabbitMqUtil;
 import com.lens.blog.xo.utils.WebUtil;
-import com.lens.blog.vo.FeedbackVO;
-import com.lens.blog.vo.LinkVO;
-import com.lens.blog.vo.UserVO;
 import com.lens.common.base.constant.Constants;
 import com.lens.common.base.enums.EGender;
 import com.lens.common.base.enums.ELinkStatus;
@@ -30,18 +33,13 @@ import com.lens.common.core.utils.MD5Utils;
 import com.lens.common.core.utils.ResultUtil;
 import com.lens.common.core.utils.StringUtils;
 import com.lens.common.core.utils.UniappUtils;
-import com.lens.common.db.entity.Feedback;
-import com.lens.common.db.entity.Link;
-import com.lens.common.db.entity.SystemConfig;
-import com.lens.common.db.entity.User;
 import com.lens.common.web.feign.PictureFeignClient;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-
 import me.zhyd.oauth.config.AuthConfig;
 import me.zhyd.oauth.exception.AuthException;
 import me.zhyd.oauth.model.AuthCallback;
@@ -60,7 +58,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
@@ -75,7 +72,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RefreshScope
 @RequestMapping("/oauth")
-@Api(value = "第三方登录相关接口", tags = {"第三方登录相关接口"})
+@Tag(name = "第三方登录相关接口", description = "第三方登录相关接口")
 @Slf4j
 public class AuthRestApi {
     @Autowired
@@ -129,7 +126,7 @@ public class AuthRestApi {
     @Resource
     private PictureFeignClient pictureFeignClient;
 
-    @ApiOperation(value = "获取认证", notes = "获取认证")
+    @Operation(summary = "获取认证", description = "获取认证")
     @RequestMapping("/render")
     public String renderAuth(String source) {
         // 将传递过来的转换成大写
@@ -331,7 +328,7 @@ public class AuthRestApi {
      * @param map
      * @return
      */
-    @ApiOperation(value = "decryptData", notes = "QQ小程序登录数据解析")
+    @Operation(summary = "decryptData", description = "QQ小程序登录数据解析")
     @PostMapping("/decryptData")
     public String decryptData(@RequestBody Map<String, String> map) throws UnsupportedEncodingException {
 
@@ -469,7 +466,7 @@ public class AuthRestApi {
         return authRequest.refresh(AuthToken.builder().refreshToken(token).build());
     }
 
-    @ApiOperation(value = "获取用户信息", notes = "获取用户信息")
+    @Operation(summary = "获取用户信息", description = "获取用户信息")
     @GetMapping("/verify/{accessToken}")
     public String verifyUser(@PathVariable("accessToken") String accessToken) {
         String userInfo = stringRedisTemplate.opsForValue().get(RedisConstants.USER_TOKEN + Constants.SYMBOL_COLON + accessToken);
@@ -481,7 +478,7 @@ public class AuthRestApi {
         }
     }
 
-    @ApiOperation(value = "删除accessToken", notes = "删除accessToken")
+    @Operation(summary = "删除accessToken", description = "删除accessToken")
     @RequestMapping("/delete/{accessToken}")
     public String deleteUserAccessToken(@PathVariable("accessToken") String accessToken) {
         stringRedisTemplate.delete(RedisConstants.USER_TOKEN + Constants.SYMBOL_COLON + accessToken);
@@ -511,7 +508,7 @@ public class AuthRestApi {
     /**
      * 获取关于我的信息
      */
-    @ApiOperation(value = "编辑用户信息", notes = "编辑用户信息")
+    @Operation(summary = "编辑用户信息", description = "编辑用户信息")
     @PostMapping("/editUser")
     public String editUser(HttpServletRequest request, @RequestBody UserVO userVO) {
         if (request.getAttribute(SysConstants.USER_UID) == null || request.getAttribute(SysConstants.TOKEN) == null) {
@@ -559,7 +556,7 @@ public class AuthRestApi {
         }
     }
 
-    @ApiOperation(value = "更新用户密码", notes = "更新用户密码")
+    @Operation(summary = "更新用户密码", description = "更新用户密码")
     @PostMapping("/updateUserPwd")
     public String updateUserPwd(HttpServletRequest request, @RequestParam(value = "oldPwd") String oldPwd, @RequestParam("newPwd") String newPwd) {
         if (StringUtils.isEmpty(oldPwd)) {
@@ -583,7 +580,7 @@ public class AuthRestApi {
         return ResultUtil.result(SysConstants.ERROR, MessageConstants.PASSWORD_IS_ERROR);
     }
 
-    @ApiOperation(value = "申请友链", notes = "申请友链")
+    @Operation(summary = "申请友链", description = "申请友链")
     @PostMapping("/replyBlogLink")
     public String replyBlogLink(HttpServletRequest request, @RequestBody LinkVO linkVO) {
         if (request.getAttribute(SysConstants.USER_UID) == null) {
@@ -656,7 +653,7 @@ public class AuthRestApi {
 
     }
 
-    @ApiOperation(value = "获取用户反馈", notes = "获取用户反馈")
+    @Operation(summary = "获取用户反馈", description = "获取用户反馈")
     @GetMapping("/getFeedbackList")
     public String getFeedbackList(HttpServletRequest request) {
         if (request.getAttribute(SysConstants.USER_UID) == null) {
@@ -675,7 +672,7 @@ public class AuthRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, pageList);
     }
 
-    @ApiOperation(value = "提交反馈", notes = "提交反馈", response = String.class)
+    @Operation(summary = "提交反馈", description = "提交反馈")
     @PostMapping("/addFeedback")
     public String edit(HttpServletRequest request, @Validated({Insert.class}) @RequestBody FeedbackVO feedbackVO, BindingResult result) {
 
@@ -721,7 +718,7 @@ public class AuthRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, MessageConstants.INSERT_SUCCESS);
     }
 
-    @ApiOperation(value = "绑定用户邮箱", notes = "绑定用户邮箱")
+    @Operation(summary = "绑定用户邮箱", description = "绑定用户邮箱")
     @GetMapping("/bindUserEmail/{token}/{code}")
     public String bindUserEmail(@PathVariable("token") String token, @PathVariable("code") String code) {
 

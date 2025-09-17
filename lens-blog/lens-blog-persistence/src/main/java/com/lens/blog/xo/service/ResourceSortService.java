@@ -1,8 +1,9 @@
 package com.lens.blog.xo.service;
 
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.lens.blog.entity.ResourceSort;
 import com.lens.blog.vo.ResourceSortVO;
-import com.lens.common.db.entity.ResourceSort;
 import com.lens.common.db.mybatis.service.SuperService;
 
 import java.util.List;

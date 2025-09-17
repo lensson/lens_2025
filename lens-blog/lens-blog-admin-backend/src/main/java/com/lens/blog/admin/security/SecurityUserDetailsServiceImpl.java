@@ -2,12 +2,13 @@ package com.lens.blog.admin.security;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lens.blog.admin.constant.SysConstants;
+import com.lens.blog.entity.Admin;
+import com.lens.blog.entity.Role;
 import com.lens.blog.xo.constant.SQLConstants;
 import com.lens.blog.xo.service.AdminService;
 import com.lens.blog.xo.service.RoleService;
 
-import com.lens.common.db.entity.Admin;
-import com.lens.common.db.entity.Role;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

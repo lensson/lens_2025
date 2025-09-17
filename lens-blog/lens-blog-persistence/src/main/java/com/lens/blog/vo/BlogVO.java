@@ -1,13 +1,13 @@
 package com.lens.blog.vo;
 
 
+import com.lens.blog.entity.BlogSort;
+import com.lens.blog.entity.Tag;
 import com.lens.common.base.validator.annotion.IntegerNotNull;
 import com.lens.common.base.validator.annotion.NotBlank;
 import com.lens.common.base.validator.group.Insert;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.base.vo.BaseVO;
-import com.lens.common.db.entity.BlogSort;
-import com.lens.common.db.entity.Tag;
 import lombok.Data;
 
 import java.util.List;

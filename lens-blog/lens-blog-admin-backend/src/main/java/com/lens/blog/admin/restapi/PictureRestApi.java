@@ -3,15 +3,15 @@ package com.lens.blog.admin.restapi;
 
 import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.annotion.OperationLogger.OperationLogger;
-import com.lens.blog.xo.service.PictureService;
 import com.lens.blog.vo.PictureVO;
+import com.lens.blog.xo.service.PictureService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.GetList;
 import com.lens.common.base.validator.group.Insert;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -31,7 +31,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/picture")
-@Api(value = "图片相关接口", tags = {"图片相关接口"})
+@Tag(name ="图片相关接口", description = "图片相关接口")
 @Slf4j
 public class PictureRestApi {
 
@@ -39,7 +39,7 @@ public class PictureRestApi {
     private PictureService pictureService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取图片列表", notes = "获取图片列表", response = String.class)
+    @Operation(summary = "获取图片列表", description ="获取图片列表")
     @PostMapping(value = "/getList")
     public String getList(@Validated({GetList.class}) @RequestBody PictureVO pictureVO, BindingResult result) {
 
@@ -51,7 +51,7 @@ public class PictureRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "增加图片")
-    @ApiOperation(value = "增加图片", notes = "增加图片", response = String.class)
+    @Operation(summary = "增加图片", description ="增加图片")
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody List<PictureVO> pictureVOList, BindingResult result) {
         // 参数校验
@@ -62,7 +62,7 @@ public class PictureRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "编辑图片")
-    @ApiOperation(value = "编辑图片", notes = "编辑图片", response = String.class)
+    @Operation(summary = "编辑图片", description ="编辑图片")
     @PostMapping("/edit")
     public String edit(@Validated({Update.class}) @RequestBody PictureVO pictureVO, BindingResult result) {
         // 参数校验
@@ -73,7 +73,7 @@ public class PictureRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "删除图片")
-    @ApiOperation(value = "删除图片", notes = "删除图片", response = String.class)
+    @Operation(summary = "删除图片", description ="删除图片")
     @PostMapping("/delete")
     public String delete(@RequestBody PictureVO pictureVO) {
         log.info("删除图片:{}", pictureVO);
@@ -82,7 +82,7 @@ public class PictureRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "通过图片Uid将图片设为封面")
-    @ApiOperation(value = "通过图片Uid将图片设为封面", notes = "通过图片Uid将图片设为封面", response = String.class)
+    @Operation(summary = "通过图片Uid将图片设为封面", description ="通过图片Uid将图片设为封面")
     @PostMapping("/setCover")
     public String setCover(@Validated({Update.class}) @RequestBody PictureVO pictureVO, BindingResult result) {
         // 参数校验

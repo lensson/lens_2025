@@ -6,6 +6,9 @@ import com.lens.blog.admin.constant.MessageConstants;
 import com.lens.blog.admin.constant.RedisConstants;
 import com.lens.blog.admin.constant.SQLConstants;
 import com.lens.blog.admin.constant.SysConstants;
+import com.lens.blog.entity.Admin;
+import com.lens.blog.entity.CategoryMenu;
+import com.lens.blog.entity.Role;
 import com.lens.blog.xo.service.AdminService;
 import com.lens.blog.xo.service.CategoryMenuService;
 import com.lens.blog.xo.service.RoleService;
@@ -15,9 +18,6 @@ import com.lens.common.base.enums.EStatus;
 import com.lens.common.base.utils.JsonUtils;
 import com.lens.common.core.utils.ResultUtil;
 import com.lens.common.core.utils.StringUtils;
-import com.lens.common.db.entity.Admin;
-import com.lens.common.db.entity.CategoryMenu;
-import com.lens.common.db.entity.Role;
 import com.lens.common.redis.utils.RedisUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;

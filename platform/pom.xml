@@ -31,11 +31,11 @@
       <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
     </dependency>
 
-    <dependency>
-      <groupId>io.springfox</groupId>
-      <artifactId>springfox-boot-starter</artifactId>
-      <version>${swagger.starter.version}</version>
-    </dependency>
+<!--    <dependency>-->
+<!--      <groupId>io.springfox</groupId>-->
+<!--      <artifactId>springfox-boot-starter</artifactId>-->
+<!--      <version>${swagger.starter.version}</version>-->
+<!--    </dependency>-->
 
   </dependencies>
 

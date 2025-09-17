@@ -1,6 +1,6 @@
 package com.lens.blog.admin.restapi;
 
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/visitor")
-@Api(value = "游客相关接口", tags = {"游客相关接口"})
+@Tag(name ="游客相关接口", description = "游客相关接口")
 @Slf4j
 public class VisitorRestApi {
 

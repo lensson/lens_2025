@@ -5,14 +5,13 @@ import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
 import com.lens.blog.admin.constant.RedisConstants;
 import com.lens.blog.admin.constant.SysConstants;
+import com.lens.blog.entity.SysLog;
 import com.lens.common.base.constant.Constants;
 import com.lens.common.core.security.SecurityUser;
 import com.lens.common.core.utils.IpUtils;
 import com.lens.common.core.utils.StringUtils;
-import com.lens.common.db.entity.SysLog;
 import com.lens.common.redis.utils.RedisUtil;
 import com.lens.common.web.holder.AbstractRequestAwareRunnable;
-
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

@@ -3,16 +3,16 @@ package com.lens.blog.admin.restapi;
 
 import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.annotion.OperationLogger.OperationLogger;
-import com.lens.blog.xo.service.UserService;
 import com.lens.blog.vo.UserVO;
+import com.lens.blog.xo.service.UserService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.Delete;
 import com.lens.common.base.validator.group.GetList;
 import com.lens.common.base.validator.group.Insert;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2020年1月4日21:29:09
  */
 @RestController
-@Api(value = "用户相关接口", tags = {"用户相关接口"})
+@Tag(name ="用户相关接口", description = "用户相关接口")
 @RequestMapping("/user")
 @Slf4j
 public class UserRestApi {
@@ -38,7 +38,7 @@ public class UserRestApi {
     private UserService userService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取用户列表", notes = "获取用户列表", response = String.class)
+    @Operation(summary = "获取用户列表", description ="获取用户列表")
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class}) @RequestBody UserVO userVO, BindingResult result) {
 
@@ -50,7 +50,7 @@ public class UserRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "新增用户")
-    @ApiOperation(value = "新增用户", notes = "新增用户", response = String.class)
+    @Operation(summary = "新增用户", description ="新增用户")
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody UserVO userVO, BindingResult result) {
 
@@ -62,7 +62,7 @@ public class UserRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "编辑用户")
-    @ApiOperation(value = "编辑用户", notes = "编辑用户", response = String.class)
+    @Operation(summary = "编辑用户", description ="编辑用户")
     @PostMapping("/edit")
     public String edit(@Validated({Update.class}) @RequestBody UserVO userVO, BindingResult result) {
         // 参数校验
@@ -73,7 +73,7 @@ public class UserRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "删除用户")
-    @ApiOperation(value = "删除用户", notes = "删除用户", response = String.class)
+    @Operation(summary = "删除用户", description ="删除用户")
     @PostMapping("/delete")
     public String delete(@Validated({Delete.class}) @RequestBody UserVO userVO, BindingResult result) {
 
@@ -85,7 +85,7 @@ public class UserRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "重置用户密码")
-    @ApiOperation(value = "重置用户密码", notes = "重置用户密码", response = String.class)
+    @Operation(summary = "重置用户密码", description ="重置用户密码")
     @PostMapping("/resetUserPassword")
     public String resetUserPassword(@Validated({Delete.class}) @RequestBody UserVO userVO, BindingResult result) {
 

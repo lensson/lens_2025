@@ -2,6 +2,9 @@ package com.lens.blog.web.restapi;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.lens.blog.entity.SystemConfig;
+import com.lens.blog.entity.User;
+import com.lens.blog.vo.UserVO;
 import com.lens.blog.web.constant.MessageConstants;
 import com.lens.blog.web.constant.RedisConstants;
 import com.lens.blog.web.constant.SQLConstants;
@@ -11,7 +14,6 @@ import com.lens.blog.xo.service.UserService;
 import com.lens.blog.xo.service.WebConfigService;
 import com.lens.blog.xo.utils.RabbitMqUtil;
 import com.lens.blog.xo.utils.WebUtil;
-import com.lens.blog.vo.UserVO;
 import com.lens.common.base.constant.Constants;
 import com.lens.common.base.enums.EOpenStatus;
 import com.lens.common.base.enums.EStatus;
@@ -23,14 +25,12 @@ import com.lens.common.core.utils.IpUtils;
 import com.lens.common.core.utils.MD5Utils;
 import com.lens.common.core.utils.ResultUtil;
 import com.lens.common.core.utils.StringUtils;
-import com.lens.common.db.entity.SystemConfig;
-import com.lens.common.db.entity.User;
 import com.lens.common.redis.utils.RedisUtil;
 import com.lens.common.web.feign.PictureFeignClient;
 import com.lens.common.web.holder.RequestHolder;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +57,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RefreshScope
 @RequestMapping("/login")
-@Api(value = "登录管理相关接口", tags = {"登录管理相关接口"})
+@Tag(name = "登录管理相关接口", description = "登录管理相关接口")
 @Slf4j
 public class LoginRestApi {
 
@@ -78,7 +78,7 @@ public class LoginRestApi {
     @Value(value = "${BLOG.USER_TOKEN_SURVIVAL_TIME}")
     private Long userTokenSurvivalTime;
 
-    @ApiOperation(value = "用户登录", notes = "用户登录")
+    @Operation(summary = "用户登录", description = "用户登录")
     @PostMapping("/login")
     public String login(@Validated({GetOne.class}) @RequestBody UserVO userVO, BindingResult result) {
         ThrowableUtils.checkParamArgument(result);
@@ -131,7 +131,7 @@ public class LoginRestApi {
         }
     }
 
-    @ApiOperation(value = "用户注册", notes = "用户注册")
+    @Operation(summary = "用户注册", description = "用户注册")
     @PostMapping("/register")
     public String register(@Validated({Insert.class}) @RequestBody UserVO userVO, BindingResult result) {
         ThrowableUtils.checkParamArgument(result);
@@ -192,7 +192,7 @@ public class LoginRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, resultMessage);
     }
 
-    @ApiOperation(value = "激活用户账号", notes = "激活用户账号")
+    @Operation(summary = "激活用户账号", description = "激活用户账号")
     @GetMapping("/activeUser/{token}")
     public String bindUserEmail(@PathVariable("token") String token) {
         // 从redis中获取用户信息
@@ -225,9 +225,9 @@ public class LoginRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, MessageConstants.OPERATION_SUCCESS);
     }
 
-    @ApiOperation(value = "退出登录", notes = "退出登录", response = String.class)
+    @Operation(summary = "退出登录", description = "退出登录")
     @PostMapping(value = "/logout")
-    public String logout(@ApiParam(name = "token", value = "token令牌", required = false) @RequestParam(name = "token", required = false) String token) {
+    public String logout(@Parameter(name = "token", description = "token令牌", required = false) @RequestParam(name = "token", required = false) String token) {
         if (StringUtils.isEmpty(token)) {
             return ResultUtil.result(SysConstants.ERROR, MessageConstants.OPERATION_FAIL);
         }

@@ -8,14 +8,13 @@ import com.lens.blog.admin.constant.SysConstants;
 import com.lens.common.base.utils.JsonUtils;
 import com.lens.common.core.utils.ResultUtil;
 import com.lens.common.web.feign.SearchFeignClient;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import java.util.Map;
 
@@ -27,7 +26,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/search")
-@Api(value = "索引维护相关接口", tags = {"索引维护相关接口"})
+@Tag(name ="索引维护相关接口", description = "索引维护相关接口")
 @Slf4j
 public class SearchIndexRestApi {
 
@@ -36,7 +35,7 @@ public class SearchIndexRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "初始化ElasticSearch索引")
-    @ApiOperation(value = "初始化ElasticSearch索引", notes = "初始化solr索引")
+    @Operation(summary = "初始化ElasticSearch索引", description ="初始化solr索引")
     @PostMapping("/initElasticIndex")
     public String initElasticIndex() {
 
@@ -51,7 +50,7 @@ public class SearchIndexRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "初始化Solr索引")
-    @ApiOperation(value = "初始化Solr索引", notes = "初始化solr索引")
+    @Operation(summary = "初始化Solr索引", description ="初始化solr索引")
     @PostMapping("/initSolrIndex")
     public String initSolrIndex() {
 

@@ -3,16 +3,16 @@ package com.lens.blog.admin.restapi;
 import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.annotion.AvoidRepeatableCommit.AvoidRepeatableCommit;
 import com.lens.blog.admin.annotion.OperationLogger.OperationLogger;
-import com.lens.blog.xo.service.WebNavbarService;
 import com.lens.blog.vo.WebNavbarVO;
+import com.lens.blog.xo.service.WebNavbarService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.Delete;
 import com.lens.common.base.validator.group.GetList;
 import com.lens.common.base.validator.group.Insert;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/webNavbar")
-@Api(value = "门户导航栏管理", tags = {"门户导航栏相关接口"})
+@Tag(name ="门户导航栏管理", description = "门户导航栏相关接口")
 @Slf4j
 public class WebNavbarRestApi {
 
@@ -35,7 +35,7 @@ public class WebNavbarRestApi {
     private WebNavbarService webNavbarService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取门户导航栏列表", notes = "获取门户导航栏列表", response = String.class)
+    @Operation(summary = "获取门户导航栏列表", description ="获取门户导航栏列表")
     @GetMapping("/getList")
     public String getList(@Validated({GetList.class}) @RequestBody WebNavbarVO webNavbarVO, BindingResult result) {
 
@@ -44,7 +44,7 @@ public class WebNavbarRestApi {
         return ResultUtil.successWithData(webNavbarService.getPageList(webNavbarVO));
     }
 
-    @ApiOperation(value = "获取门户导航栏所有列表", notes = "获取门户导航栏所有列表", response = String.class)
+    @Operation(summary = "获取门户导航栏所有列表", description ="获取门户导航栏所有列表")
     @GetMapping("/getAllList")
     public String getAllList() {
         return ResultUtil.successWithData(webNavbarService.getAllList());
@@ -53,7 +53,7 @@ public class WebNavbarRestApi {
     @AvoidRepeatableCommit
     @AuthorityVerify
     @OperationLogger(value = "增加门户导航栏")
-    @ApiOperation(value = "增加门户导航栏", notes = "增加门户导航栏", response = String.class)
+    @Operation(summary = "增加门户导航栏", description ="增加门户导航栏")
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody WebNavbarVO webNavbarVO, BindingResult result) {
 
@@ -65,7 +65,7 @@ public class WebNavbarRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "编辑门户导航栏")
-    @ApiOperation(value = "编辑门户导航栏", notes = "编辑门户导航栏", response = String.class)
+    @Operation(summary = "编辑门户导航栏", description ="编辑门户导航栏")
     @PostMapping("/edit")
     public String edit(@Validated({Update.class}) @RequestBody WebNavbarVO webNavbarVO, BindingResult result) {
 
@@ -77,7 +77,7 @@ public class WebNavbarRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "删除门户导航栏")
-    @ApiOperation(value = "删除门户导航栏", notes = "删除门户导航栏", response = String.class)
+    @Operation(summary = "删除门户导航栏", description ="删除门户导航栏")
     @PostMapping("/delete")
     public String delete(@Validated({Delete.class}) @RequestBody WebNavbarVO webNavbarVO, BindingResult result) {
 

@@ -6,9 +6,9 @@ import com.lens.blog.admin.constant.SysConstants;
 import com.lens.common.base.constant.Constants;
 import com.lens.common.core.utils.CheckUtils;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ import java.util.Map;
 @RestController
 @RefreshScope
 @RequestMapping("/creatCode")
-@Api(value = "生成验证码相关接口", tags = {"生成验证码相关接口"})
+@Tag(name ="生成验证码相关接口", description = "生成验证码相关接口")
 @Slf4j
 public class CreatCodeRestApi {
 
@@ -45,14 +45,14 @@ public class CreatCodeRestApi {
     private String templateCode;
     @Value(value = "${signName}")
     private String signName;
-    @Value(value = "${moguBlog.email}")
+    @Value(value = "${lensBlog.email}")
     private String moguBlogEmail;
 
     @OperationLogger(value = "生成验证码")
-    @ApiOperation(value = "生成验证码", notes = "生成验证码")
+    @Operation(summary = "生成验证码", description ="生成验证码")
     @PostMapping("/validCode")
     public String validCode(HttpServletRequest request,
-                            @ApiParam(name = "info", value = "注册手机号码或邮箱", required = true) @RequestBody(required = true) String info) {
+                            @Parameter(name = "info", description = "注册手机号码或邮箱", required = true) @RequestBody(required = true) String info) {
 
         if (!CheckUtils.checkMobileNumber(info)) {
             if (!CheckUtils.checkEmail(info)) {

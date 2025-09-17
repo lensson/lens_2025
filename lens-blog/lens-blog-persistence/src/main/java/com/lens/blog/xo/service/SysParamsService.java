@@ -2,8 +2,9 @@ package com.lens.blog.xo.service;
 
 
 
+
+import com.lens.blog.entity.SysParams;
 import com.lens.blog.vo.SysParamsVO;
-import com.lens.common.db.entity.SysParams;
 import com.lens.common.db.mybatis.service.SuperService;
 
 import java.util.List;

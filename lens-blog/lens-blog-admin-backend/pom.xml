@@ -19,6 +19,11 @@
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>com.lens</groupId>
+            <artifactId>lens-common-base</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>com.lens</groupId>
@@ -38,6 +43,7 @@
             <artifactId>lens-common-web</artifactId>
             <version>${project.version}</version>
         </dependency>
+
 
         <dependency>
             <groupId>com.lens</groupId>
@@ -77,11 +83,6 @@
             <version>${springdoc-openapi-starter-webmvc-ui.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-boot-starter</artifactId>
-            <version>${swagger.starter.version}</version>
-        </dependency>
 
         <!-- load bootstrap.yml -->
         <dependency>
@@ -95,5 +96,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+        </dependency>
+
     </dependencies>
 </project>

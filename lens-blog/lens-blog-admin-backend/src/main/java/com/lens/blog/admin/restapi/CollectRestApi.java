@@ -1,7 +1,7 @@
 package com.lens.blog.admin.restapi;
 
 
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/collect")
-@Api(value = "用户收藏相关接口", tags = {"用户收藏相关接口"})
+@Tag(name ="用户收藏相关接口", description = "用户收藏相关接口")
 public class CollectRestApi {
 
 }

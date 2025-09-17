@@ -2,12 +2,12 @@ package com.lens.blog.admin.security;
 
 
 import com.lens.blog.admin.constant.RedisConstants;
+import com.lens.blog.entity.OnlineAdmin;
 import com.lens.blog.xo.constant.SysConstants;
 import com.lens.common.base.constant.Constants;
 import com.lens.common.base.utils.JsonUtils;
 import com.lens.common.core.utils.DateUtils;
 import com.lens.common.core.utils.StringUtils;
-import com.lens.common.db.entity.OnlineAdmin;
 import com.lens.common.redis.utils.RedisUtil;
 import com.lens.common.web.jwt.Audience;
 import com.lens.common.web.jwt.JwtTokenUtil;
@@ -26,8 +26,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-
 
 import java.io.IOException;
 import java.util.Date;

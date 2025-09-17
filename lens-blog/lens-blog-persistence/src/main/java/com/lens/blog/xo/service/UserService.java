@@ -1,13 +1,11 @@
 package com.lens.blog.xo.service;
 
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.lens.blog.entity.User;
 import com.lens.blog.vo.UserVO;
-import com.lens.common.db.entity.User;
 import com.lens.common.db.mybatis.service.SuperService;
-
-
 import jakarta.servlet.http.HttpServletRequest;
-
 
 import java.util.List;
 

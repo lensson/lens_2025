@@ -1,9 +1,9 @@
 package com.lens.blog.xo.service.impl;
 
 
-import com.lens.blog.mapper.CollectMapper;
+import com.lens.blog.entity.Collect;
+import com.lens.blog.xo.mapper.CollectMapper;
 import com.lens.blog.xo.service.CollectService;
-import com.lens.common.db.entity.Collect;
 import com.lens.common.db.mybatis.serviceImpl.SuperServiceImpl;
 import org.springframework.stereotype.Service;
 

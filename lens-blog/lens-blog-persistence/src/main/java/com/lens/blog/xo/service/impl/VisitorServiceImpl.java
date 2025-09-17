@@ -1,9 +1,9 @@
 package com.lens.blog.xo.service.impl;
 
 
-import com.lens.blog.mapper.VisitorMapper;
+import com.lens.blog.entity.Visitor;
+import com.lens.blog.xo.mapper.VisitorMapper;
 import com.lens.blog.xo.service.VisitorService;
-import com.lens.common.db.entity.Visitor;
 import com.lens.common.db.mybatis.serviceImpl.SuperServiceImpl;
 import org.springframework.stereotype.Service;
 

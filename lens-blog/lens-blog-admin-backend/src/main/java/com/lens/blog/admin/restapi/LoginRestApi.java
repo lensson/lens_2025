@@ -4,6 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lens.blog.admin.constant.MessageConstants;
 import com.lens.blog.admin.constant.SQLConstants;
 import com.lens.blog.admin.constant.SysConstants;
+import com.lens.blog.entity.Admin;
+import com.lens.blog.entity.CategoryMenu;
+import com.lens.blog.entity.OnlineAdmin;
+import com.lens.blog.entity.Role;
 import com.lens.blog.xo.constant.RedisConstants;
 import com.lens.blog.xo.service.AdminService;
 import com.lens.blog.xo.service.CategoryMenuService;
@@ -18,17 +22,13 @@ import com.lens.common.core.utils.CheckUtils;
 import com.lens.common.core.utils.IpUtils;
 import com.lens.common.core.utils.ResultUtil;
 import com.lens.common.core.utils.StringUtils;
-import com.lens.common.db.entity.Admin;
-import com.lens.common.db.entity.CategoryMenu;
-import com.lens.common.db.entity.OnlineAdmin;
-import com.lens.common.db.entity.Role;
 import com.lens.common.redis.utils.RedisUtil;
 import com.lens.common.web.feign.PictureFeignClient;
 import com.lens.common.web.jwt.Audience;
 import com.lens.common.web.jwt.JwtTokenUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -42,7 +42,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -55,7 +54,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RefreshScope
 @RequestMapping("/auth")
-@Api(value = "登录相关接口", tags = {"登录相关接口"})
+@Tag(name ="登录相关接口", description = "登录相关接口")
 @Slf4j
 public class LoginRestApi {
 
@@ -82,12 +81,12 @@ public class LoginRestApi {
     @Autowired
     private WebConfigService webConfigService;
 
-    @ApiOperation(value = "用户登录", notes = "用户登录")
+    @Operation(summary = "用户登录", description ="用户登录")
     @PostMapping("/login")
     public String login(HttpServletRequest request,
-                        @ApiParam(name = "username", value = "用户名或邮箱或手机号") @RequestParam(name = "username", required = false) String username,
-                        @ApiParam(name = "password", value = "密码") @RequestParam(name = "password", required = false) String password,
-                        @ApiParam(name = "isRememberMe", value = "是否记住账号密码") @RequestParam(name = "isRememberMe", required = false, defaultValue = "false") Boolean isRememberMe) {
+                        @Parameter(name = "username", description = "用户名或邮箱或手机号") @RequestParam(name = "username", required = false) String username,
+                        @Parameter(name = "password", description = "密码") @RequestParam(name = "password", required = false) String password,
+                        @Parameter(name = "isRememberMe", description = "是否记住账号密码") @RequestParam(name = "isRememberMe", required = false, defaultValue = "false") Boolean isRememberMe) {
 
         if (StringUtils.isEmpty(username) || StringUtils.isEmpty(password)) {
             return ResultUtil.result(SysConstants.ERROR, "账号或密码不能为空");
@@ -166,10 +165,10 @@ public class LoginRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, result);
     }
 
-    @ApiOperation(value = "用户信息", notes = "用户信息", response = String.class)
+    @Operation(summary = "用户信息", description ="用户信息")
     @GetMapping(value = "/info")
     public String info(HttpServletRequest request,
-                       @ApiParam(name = "token", value = "token令牌", required = false) @RequestParam(name = "token", required = false) String token) {
+                       @Parameter(name = "token", description = "token令牌", required = false) @RequestParam(name = "token", required = false) String token) {
 
         Map<String, Object> map = new HashMap<>(Constants.NUM_THREE);
         if (request.getAttribute(SysConstants.ADMIN_UID) == null) {
@@ -195,7 +194,7 @@ public class LoginRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, map);
     }
 
-    @ApiOperation(value = "获取当前用户的菜单", notes = "获取当前用户的菜单", response = String.class)
+    @Operation(summary = "获取当前用户的菜单", description ="获取当前用户的菜单")
     @GetMapping(value = "/getMenu")
     public String getMenu(HttpServletRequest request) {
 
@@ -263,14 +262,14 @@ public class LoginRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, map);
     }
 
-    @ApiOperation(value = "获取网站名称", notes = "获取网站名称", response = String.class)
+    @Operation(summary = "获取网站名称", description ="获取网站名称")
     @GetMapping(value = "/getWebSiteName")
     public String getWebSiteName() {
         return ResultUtil.successWithData(webConfigService.getWebSiteName());
     }
 
 
-    @ApiOperation(value = "退出登录", notes = "退出登录", response = String.class)
+    @Operation(summary = "退出登录", description ="退出登录")
     @PostMapping(value = "/logout")
     public String logout() {
         ServletRequestAttributes attribute = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();

@@ -2,9 +2,10 @@ package com.lens.blog.xo.service;
 
 
 
-import com.lens.blog.xo.dto.LinkPageDTO;
+
+import com.lens.blog.entity.Link;
 import com.lens.blog.vo.LinkVO;
-import com.lens.common.db.entity.Link;
+import com.lens.blog.xo.dto.LinkPageDTO;
 import com.lens.common.db.mybatis.page.vo.PageVO;
 import com.lens.common.db.mybatis.service.SuperService;
 

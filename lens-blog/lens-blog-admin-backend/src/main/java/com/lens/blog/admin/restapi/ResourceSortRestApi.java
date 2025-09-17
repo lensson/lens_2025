@@ -4,16 +4,16 @@ package com.lens.blog.admin.restapi;
 import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.annotion.AvoidRepeatableCommit.AvoidRepeatableCommit;
 import com.lens.blog.admin.annotion.OperationLogger.OperationLogger;
-import com.lens.blog.xo.service.ResourceSortService;
 import com.lens.blog.vo.ResourceSortVO;
+import com.lens.blog.xo.service.ResourceSortService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.Delete;
 import com.lens.common.base.validator.group.GetList;
 import com.lens.common.base.validator.group.Insert;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -31,7 +31,7 @@ import java.util.List;
  * @author 陌溪
  * @date 2020年1月9日19:23:28
  */
-@Api(value = "资源分类相关接口", tags = {"资源分类相关接口"})
+@Tag(name ="资源分类相关接口", description = "资源分类相关接口")
 @RestController
 @RequestMapping("/resourceSort")
 @Slf4j
@@ -41,7 +41,7 @@ public class ResourceSortRestApi {
     private ResourceSortService resourceSortService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取资源分类列表", notes = "获取资源分类列表", response = String.class)
+    @Operation(summary = "获取资源分类列表", description ="获取资源分类列表")
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class}) @RequestBody ResourceSortVO resourceSortVO, BindingResult result) {
 
@@ -53,7 +53,7 @@ public class ResourceSortRestApi {
     @AvoidRepeatableCommit
     @AuthorityVerify
     @OperationLogger(value = "增加资源分类")
-    @ApiOperation(value = "增加资源分类", notes = "增加资源分类", response = String.class)
+    @Operation(summary = "增加资源分类", description ="增加资源分类")
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody ResourceSortVO resourceSortVO, BindingResult result) {
 
@@ -65,7 +65,7 @@ public class ResourceSortRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "编辑资源分类")
-    @ApiOperation(value = "编辑资源分类", notes = "编辑资源分类", response = String.class)
+    @Operation(summary = "编辑资源分类", description ="编辑资源分类")
     @PostMapping("/edit")
     public String edit(@Validated({Update.class}) @RequestBody ResourceSortVO resourceSortVO, BindingResult result) {
 
@@ -77,7 +77,7 @@ public class ResourceSortRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "批量删除资源分类")
-    @ApiOperation(value = "批量删除资源分类", notes = "批量删除资源分类", response = String.class)
+    @Operation(summary = "批量删除资源分类", description ="批量删除资源分类")
     @PostMapping("/deleteBatch")
     public String delete(@Validated({Delete.class}) @RequestBody List<ResourceSortVO> resourceSortVOList, BindingResult result) {
 
@@ -89,7 +89,7 @@ public class ResourceSortRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "置顶资源分类")
-    @ApiOperation(value = "置顶分类", notes = "置顶分类", response = String.class)
+    @Operation(summary = "置顶分类", description ="置顶分类")
     @PostMapping("/stick")
     public String stick(@Validated({Delete.class}) @RequestBody ResourceSortVO resourceSortVO, BindingResult result) {
 

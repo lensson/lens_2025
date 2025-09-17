@@ -1,7 +1,7 @@
 package com.lens.blog.xo.service;
 
 
-import com.lens.common.db.entity.CommentReport;
+import com.lens.blog.entity.CommentReport;
 import com.lens.common.db.mybatis.service.SuperService;
 
 /**

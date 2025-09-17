@@ -1,9 +1,9 @@
 package com.lens.blog.admin.security;
 
 
+import com.lens.blog.entity.Admin;
 import com.lens.common.base.enums.EStatus;
 import com.lens.common.core.security.SecurityUser;
-import com.lens.common.db.entity.Admin;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

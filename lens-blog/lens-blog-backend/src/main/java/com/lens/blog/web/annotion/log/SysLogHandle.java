@@ -1,14 +1,13 @@
 package com.lens.blog.web.annotion.log;
 
+import com.lens.blog.entity.WebVisit;
 import com.lens.blog.web.constant.RedisConstants;
 import com.lens.blog.web.constant.SysConstants;
 import com.lens.common.base.constant.Constants;
 import com.lens.common.core.utils.IpUtils;
 import com.lens.common.core.utils.StringUtils;
-import com.lens.common.db.entity.WebVisit;
 import com.lens.common.redis.utils.RedisUtil;
 import com.lens.common.web.holder.AbstractRequestAwareRunnable;
-
 
 import java.util.concurrent.TimeUnit;
 

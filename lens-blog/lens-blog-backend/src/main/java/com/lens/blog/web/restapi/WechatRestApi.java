@@ -3,6 +3,8 @@ package com.lens.blog.web.restapi;
 
 import cn.hutool.http.HttpRequest;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.lens.blog.entity.SystemConfig;
+import com.lens.blog.entity.User;
 import com.lens.blog.web.constant.SysConstants;
 import com.lens.blog.xo.constant.RedisConstants;
 import com.lens.blog.xo.constant.SQLConstants;
@@ -19,12 +21,10 @@ import com.lens.common.core.utils.MD5Utils;
 import com.lens.common.core.utils.ResultUtil;
 import com.lens.common.core.utils.StringUtils;
 import com.lens.common.core.utils.wechat.SignUtil;
-import com.lens.common.db.entity.SystemConfig;
-import com.lens.common.db.entity.User;
 import com.lens.common.redis.utils.RedisUtil;
 import com.lens.common.web.feign.PictureFeignClient;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -46,7 +46,7 @@ import java.util.concurrent.TimeUnit;
  */
 @RestController
 @RequestMapping("/wechat")
-@Api(value = "关于我相关接口", tags = {"关于我相关接口"})
+@Tag(name = "关于我相关接口", description = "关于我相关接口")
 @Slf4j
 public class WechatRestApi {
 
@@ -67,7 +67,7 @@ public class WechatRestApi {
     @Value(value = "${BLOG.USER_TOKEN_SURVIVAL_TIME}")
     private Long userTokenSurvivalTime;
 
-    @ApiOperation(value = "获取微信公众号状态", notes = "获取微信公众号状态")
+    @Operation(summary = "获取微信公众号状态", description = "获取微信公众号状态")
     @GetMapping("/wechatCheck")
     public String wechatCheck(HttpServletRequest request) {
         System.out.println("我进来了");
@@ -81,7 +81,7 @@ public class WechatRestApi {
         return null;
     }
 
-    @ApiOperation(value = "用户扫码后触发的事件", notes = "用户扫码后触发的事件")
+    @Operation(summary = "用户扫码后触发的事件", description = "用户扫码后触发的事件")
     @PostMapping("/wechatCheck")
     public String index(HttpServletRequest request) throws Exception {
 
@@ -217,7 +217,7 @@ public class WechatRestApi {
     }
 
 
-    @ApiOperation(value = "获取微信公众号登录二维码", notes = "获取微信公众号登录二维码")
+    @Operation(summary = "获取微信公众号登录二维码", description = "获取微信公众号登录二维码")
     @GetMapping("/getWechatOrCodeTicket")
     public String getWechatOrCodeTicket() {
         String requireAccessTokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxfe2c610ba4fa2839&secret=49077bace79e0b11a53c1ced6eaf289d";
@@ -238,7 +238,7 @@ public class WechatRestApi {
         return ResultUtil.errorWithMessage("获取失败二维码失败");
     }
 
-    @ApiOperation(value = "获取微信用户扫码登录状态", notes = "获取微信用户扫码登录状态")
+    @Operation(summary = "获取微信用户扫码登录状态", description = "获取微信用户扫码登录状态")
     @GetMapping("/getUserLoginStatus")
     public String getUserLoginStatus(@RequestParam("ticket") String ticket) {
 

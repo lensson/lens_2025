@@ -6,8 +6,8 @@ import com.lens.blog.admin.annotion.AvoidRepeatableCommit.AvoidRepeatableCommit;
 import com.lens.blog.admin.annotion.OperationLogger.OperationLogger;
 import com.lens.blog.admin.constant.MessageConstants;
 import com.lens.blog.admin.constant.SysConstants;
-import com.lens.blog.xo.service.SysDictDataService;
 import com.lens.blog.vo.SysDictDataVO;
+import com.lens.blog.xo.service.SysDictDataService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.Delete;
 import com.lens.common.base.validator.group.GetList;
@@ -15,8 +15,8 @@ import com.lens.common.base.validator.group.Insert;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.core.utils.ResultUtil;
 import com.lens.common.core.utils.StringUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -34,7 +34,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/sysDictData")
-@Api(value = "字典数据相关接口", tags = {"字典数据相关接口"})
+@Tag(name ="字典数据相关接口", description = "字典数据相关接口")
 @Slf4j
 public class SysDictDataRestApi {
 
@@ -42,7 +42,7 @@ public class SysDictDataRestApi {
     private SysDictDataService sysDictDataService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取字典数据列表", notes = "获取字典数据列表", response = String.class)
+    @Operation(summary = "获取字典数据列表", description ="获取字典数据列表")
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class}) @RequestBody SysDictDataVO sysDictDataVO, BindingResult result) {
 
@@ -55,7 +55,7 @@ public class SysDictDataRestApi {
     @AvoidRepeatableCommit
     @AuthorityVerify
     @OperationLogger(value = "增加字典数据")
-    @ApiOperation(value = "增加字典数据", notes = "增加字典数据", response = String.class)
+    @Operation(summary = "增加字典数据", description ="增加字典数据")
     @PostMapping("/add")
     public String add(HttpServletRequest request, @Validated({Insert.class}) @RequestBody SysDictDataVO sysDictDataVO, BindingResult result) {
 
@@ -66,7 +66,7 @@ public class SysDictDataRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "编辑字典数据")
-    @ApiOperation(value = "编辑字典数据", notes = "编辑字典数据", response = String.class)
+    @Operation(summary = "编辑字典数据", description ="编辑字典数据")
     @PostMapping("/edit")
     public String edit(HttpServletRequest request, @Validated({Update.class}) @RequestBody SysDictDataVO sysDictDataVO, BindingResult result) {
 
@@ -77,7 +77,7 @@ public class SysDictDataRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "批量删除字典数据")
-    @ApiOperation(value = "批量删除字典数据", notes = "批量删除字典数据", response = String.class)
+    @Operation(summary = "批量删除字典数据", description ="批量删除字典数据")
     @PostMapping("/deleteBatch")
     public String delete(HttpServletRequest request, @Validated({Delete.class}) @RequestBody List<SysDictDataVO> sysDictDataVoList, BindingResult result) {
 
@@ -86,7 +86,7 @@ public class SysDictDataRestApi {
         return sysDictDataService.deleteBatchSysDictData(sysDictDataVoList);
     }
 
-    @ApiOperation(value = "根据字典类型获取字典数据", notes = "根据字典类型获取字典数据", response = String.class)
+    @Operation(summary = "根据字典类型获取字典数据", description ="根据字典类型获取字典数据")
     @PostMapping("/getListByDictType")
     public String getListByDictType(@RequestParam("dictType") String dictType) {
         if (StringUtils.isEmpty(dictType)) {
@@ -95,7 +95,7 @@ public class SysDictDataRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, sysDictDataService.getListByDictType(dictType));
     }
 
-    @ApiOperation(value = "根据字典类型数组获取字典数据", notes = "根据字典类型数组获取字典数据", response = String.class)
+    @Operation(summary = "根据字典类型数组获取字典数据", description ="根据字典类型数组获取字典数据")
     @PostMapping("/getListByDictTypeList")
     public String getListByDictTypeList(@RequestBody List<String> dictTypeList) {
 

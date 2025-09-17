@@ -2,14 +2,14 @@ package com.lens.blog.admin.restapi;
 
 import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.annotion.OperationLogger.OperationLogger;
-import com.lens.blog.xo.service.AdminService;
 import com.lens.blog.vo.AdminVO;
+import com.lens.blog.xo.service.AdminService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/system")
-@Api(value = "系统设置相关接口", tags = {"系统设置相关接口"})
+@Tag(name ="系统设置相关接口", description = "系统设置相关接口")
 @Slf4j
 public class SystemRestApi {
 
@@ -33,7 +33,7 @@ public class SystemRestApi {
     private AdminService adminService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取我的信息", notes = "获取我的信息")
+    @Operation(summary = "获取我的信息", description ="获取我的信息")
     @GetMapping("/getMe")
     public String getMe() {
         return ResultUtil.successWithData(adminService.getMe());
@@ -41,7 +41,7 @@ public class SystemRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "编辑我的信息")
-    @ApiOperation(value = "编辑我的信息", notes = "获取我的信息")
+    @Operation(summary = "编辑我的信息", description ="获取我的信息")
     @PostMapping("/editMe")
     public String editMe(@Validated({Update.class}) @RequestBody AdminVO adminVO, BindingResult result) {
         // 参数校验
@@ -50,10 +50,10 @@ public class SystemRestApi {
     }
 
     @AuthorityVerify
-    @ApiOperation(value = "修改密码", notes = "修改密码")
+    @Operation(summary = "修改密码", description ="修改密码")
     @PostMapping("/changePwd")
-    public String changePwd(@ApiParam(name = "oldPwd", value = "旧密码", required = false) @RequestParam(name = "oldPwd", required = false) String oldPwd,
-                            @ApiParam(name = "newPwd", value = "新密码", required = false) @RequestParam(name = "newPwd", required = false) String newPwd) {
+    public String changePwd(@Parameter(name = "oldPwd", description = "旧密码", required = false) @RequestParam(name = "oldPwd", required = false) String oldPwd,
+                            @Parameter(name = "newPwd", description = "新密码", required = false) @RequestParam(name = "newPwd", required = false) String newPwd) {
         return adminService.changePwd(oldPwd, newPwd);
     }
 

@@ -4,16 +4,16 @@ package com.lens.blog.admin.restapi;
 import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.annotion.AvoidRepeatableCommit.AvoidRepeatableCommit;
 import com.lens.blog.admin.annotion.OperationLogger.OperationLogger;
-import com.lens.blog.xo.service.SubjectService;
 import com.lens.blog.vo.SubjectVO;
+import com.lens.blog.xo.service.SubjectService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.Delete;
 import com.lens.common.base.validator.group.GetList;
 import com.lens.common.base.validator.group.Insert;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -31,7 +31,8 @@ import java.util.List;
  * @author 陌溪
  * @date 2020年8月23日08:12:54
  */
-@Api(value = "专题相关接口", tags = {"专题相关接口"})
+@Tag(name ="专题相关接口", description = "专题相关接口"
+)
 @RestController
 @RequestMapping("/subject")
 @Slf4j
@@ -41,7 +42,7 @@ public class SubjectRestApi {
     private SubjectService subjectService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取专题列表", notes = "获取专题列表", response = String.class)
+    @Operation(summary = "获取专题列表", description ="获取专题列表")
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class}) @RequestBody SubjectVO subjectVO, BindingResult result) {
 
@@ -52,7 +53,7 @@ public class SubjectRestApi {
     @AvoidRepeatableCommit
     @AuthorityVerify
     @OperationLogger(value = "增加专题")
-    @ApiOperation(value = "增加专题", notes = "增加专题", response = String.class)
+    @Operation(summary = "增加专题", description ="增加专题")
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody SubjectVO subjectVO, BindingResult result) {
         // 参数校验
@@ -62,7 +63,7 @@ public class SubjectRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "编辑专题")
-    @ApiOperation(value = "编辑专题", notes = "编辑专题", response = String.class)
+    @Operation(summary = "编辑专题", description ="编辑专题")
     @PostMapping("/edit")
     public String edit(@Validated({Update.class}) @RequestBody SubjectVO subjectVO, BindingResult result) {
         // 参数校验
@@ -72,7 +73,7 @@ public class SubjectRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "批量删除专题")
-    @ApiOperation(value = "批量删除专题", notes = "批量删除专题", response = String.class)
+    @Operation(summary = "批量删除专题", description ="批量删除专题")
     @PostMapping("/deleteBatch")
     public String delete(@Validated({Delete.class}) @RequestBody List<SubjectVO> subjectVOList, BindingResult result) {
         // 参数校验

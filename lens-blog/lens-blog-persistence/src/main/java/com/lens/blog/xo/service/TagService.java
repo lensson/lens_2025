@@ -1,10 +1,10 @@
 package com.lens.blog.xo.service;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.lens.blog.vo.TagVO;
-import com.lens.common.db.entity.Tag;
-import com.lens.common.db.mybatis.service.SuperService;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.lens.blog.entity.Tag;
+import com.lens.blog.vo.TagVO;
+import com.lens.common.db.mybatis.service.SuperService;
 
 import java.util.List;
 

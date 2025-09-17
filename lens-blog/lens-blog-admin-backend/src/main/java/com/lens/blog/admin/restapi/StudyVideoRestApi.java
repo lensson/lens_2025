@@ -4,16 +4,16 @@ package com.lens.blog.admin.restapi;
 import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.annotion.AvoidRepeatableCommit.AvoidRepeatableCommit;
 import com.lens.blog.admin.annotion.OperationLogger.OperationLogger;
-import com.lens.blog.xo.service.StudyVideoService;
 import com.lens.blog.vo.StudyVideoVO;
+import com.lens.blog.xo.service.StudyVideoService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.Delete;
 import com.lens.common.base.validator.group.GetList;
 import com.lens.common.base.validator.group.Insert;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -33,7 +33,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/studyVideo")
-@Api(value = "学习视频相关接口", tags = {"学习视频相关接口"})
+@Tag(name ="学习视频相关接口", description = "学习视频相关接口")
 @Slf4j
 public class StudyVideoRestApi {
 
@@ -41,7 +41,7 @@ public class StudyVideoRestApi {
     private StudyVideoService studyVideoService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取学习视频列表", notes = "获取学习视频列表", response = String.class)
+    @Operation(summary = "获取学习视频列表", description ="获取学习视频列表")
     @PostMapping(value = "/getList")
     public String getList(@Validated({GetList.class}) @RequestBody StudyVideoVO studyVideoVO, BindingResult result) {
 
@@ -54,7 +54,7 @@ public class StudyVideoRestApi {
     @AvoidRepeatableCommit
     @AuthorityVerify
     @OperationLogger(value = "增加学习视频")
-    @ApiOperation(value = "增加学习视频", notes = "增加学习视频", response = String.class)
+    @Operation(summary = "增加学习视频", description ="增加学习视频")
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody StudyVideoVO studyVideoVO, BindingResult result) {
 
@@ -66,7 +66,7 @@ public class StudyVideoRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "编辑学习视频")
-    @ApiOperation(value = "编辑学习视频", notes = "编辑学习视频", response = String.class)
+    @Operation(summary = "编辑学习视频", description ="编辑学习视频")
     @PostMapping("/edit")
     public String edit(@Validated({Update.class}) @RequestBody StudyVideoVO studyVideoVO, BindingResult result) {
 
@@ -78,7 +78,7 @@ public class StudyVideoRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "删除学习视频")
-    @ApiOperation(value = "删除学习视频", notes = "删除学习视频", response = String.class)
+    @Operation(summary = "删除学习视频", description ="删除学习视频")
     @PostMapping("/deleteBatch")
     public String deleteBatch(@Validated({Delete.class}) @RequestBody List<StudyVideoVO> studyVideoVOList, BindingResult result) {
 

@@ -1,5 +1,7 @@
 package com.lens.blog.admin;
 
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
 import jakarta.annotation.PostConstruct;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
@@ -9,7 +11,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import springfox.documentation.oas.annotations.EnableOpenApi;
 
 
 import java.util.TimeZone;
@@ -22,13 +23,14 @@ import java.util.TimeZone;
  */
 @EnableTransactionManagement
 @SpringBootApplication
-@EnableOpenApi
 @EnableDiscoveryClient
 @EnableCaching
 @EnableRabbit
 @EnableFeignClients("com.lens.common.web.feign")
 @ComponentScan(basePackages = {
+        "com.lens.common.db.mybatis.config",
         "com.lens.common.web.config",
+        "com.lens.common.web.jwt",
         "com.lens.common.web.fallback",
         "com.lens.common.base.utils",
         "com.lens.common.core.utils",
@@ -37,11 +39,18 @@ import java.util.TimeZone;
         "com.lens.blog.xo.utils",
         "com.lens.blog.xo.service"
 })
+@OpenAPIDefinition(
+        info = @Info(
+                title = "Lens Blog Admin Backend",
+                version = "1.0",
+                description = "Admin Backend Documentation v1.0"))
 public class LensBlogAdminBackend {
 
     public static void main(String[] args) {
-        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Shanghai"));
-        SpringApplication.run(LensBlogAdminBackend.class, args);
+        SpringApplication sa = new SpringApplication(LensBlogAdminBackend.class);
+        sa.setAllowCircularReferences(true);
+        sa.run(args);
+//        SpringApplication.run(LensBlogAdminBackend.class, args);
     }
 
     /**

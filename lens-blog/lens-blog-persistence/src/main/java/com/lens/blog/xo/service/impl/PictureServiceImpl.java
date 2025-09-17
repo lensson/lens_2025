@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
+import com.lens.blog.entity.Blog;
+import com.lens.blog.entity.Picture;
+import com.lens.blog.entity.PictureSort;
 import com.lens.blog.xo.constant.MessageConstants;
 import com.lens.blog.xo.constant.SQLConstants;
 import com.lens.blog.xo.constant.SysConstants;
-import com.lens.blog.mapper.PictureMapper;
+import com.lens.blog.xo.mapper.PictureMapper;
 import com.lens.blog.xo.service.BlogService;
 import com.lens.blog.xo.service.PictureService;
 import com.lens.blog.xo.service.PictureSortService;
@@ -16,9 +19,7 @@ import com.lens.blog.vo.PictureVO;
 import com.lens.common.base.enums.EStatus;
 import com.lens.common.core.utils.ResultUtil;
 import com.lens.common.core.utils.StringUtils;
-import com.lens.common.db.entity.Blog;
-import com.lens.common.db.entity.Picture;
-import com.lens.common.db.entity.PictureSort;
+
 import com.lens.common.db.mybatis.serviceImpl.SuperServiceImpl;
 import com.lens.common.web.feign.PictureFeignClient;
 import jakarta.annotation.Resource;

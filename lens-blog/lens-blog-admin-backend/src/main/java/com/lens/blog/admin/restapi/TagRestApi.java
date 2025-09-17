@@ -5,16 +5,16 @@ import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.annotion.AvoidRepeatableCommit.AvoidRepeatableCommit;
 import com.lens.blog.admin.annotion.OperationLogger.OperationLogger;
 import com.lens.blog.admin.constant.SysConstants;
-import com.lens.blog.xo.service.TagService;
 import com.lens.blog.vo.TagVO;
+import com.lens.blog.xo.service.TagService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.Delete;
 import com.lens.common.base.validator.group.GetList;
 import com.lens.common.base.validator.group.Insert;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -32,7 +32,7 @@ import java.util.List;
  * @author 陌溪
  * @since 2018-09-08
  */
-@Api(value = "博客标签相关接口", tags = {"博客标签相关接口"})
+@Tag(name ="博客标签相关接口", description = "博客标签相关接口")
 @RestController
 @RequestMapping("/tag")
 @Slf4j
@@ -42,7 +42,7 @@ public class TagRestApi {
     private TagService tagService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取标签列表", notes = "获取标签列表", response = String.class)
+    @Operation(summary = "获取标签列表", description ="获取标签列表")
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class}) @RequestBody TagVO tagVO, BindingResult result) {
 
@@ -55,7 +55,7 @@ public class TagRestApi {
     @AvoidRepeatableCommit
     @AuthorityVerify
     @OperationLogger(value = "增加标签")
-    @ApiOperation(value = "增加标签", notes = "增加标签", response = String.class)
+    @Operation(summary = "增加标签", description ="增加标签")
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody TagVO tagVO, BindingResult result) {
 
@@ -67,7 +67,7 @@ public class TagRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "编辑标签")
-    @ApiOperation(value = "编辑标签", notes = "编辑标签", response = String.class)
+    @Operation(summary = "编辑标签", description ="编辑标签")
     @PostMapping("/edit")
     public String edit(@Validated({Update.class}) @RequestBody TagVO tagVO, BindingResult result) {
 
@@ -79,7 +79,7 @@ public class TagRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "批量删除标签")
-    @ApiOperation(value = "批量删除标签", notes = "批量删除标签", response = String.class)
+    @Operation(summary = "批量删除标签", description ="批量删除标签")
     @PostMapping("/deleteBatch")
     public String delete(@Validated({Delete.class}) @RequestBody List<TagVO> tagVoList, BindingResult result) {
 
@@ -91,7 +91,7 @@ public class TagRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "置顶标签")
-    @ApiOperation(value = "置顶标签", notes = "置顶标签", response = String.class)
+    @Operation(summary = "置顶标签", description ="置顶标签")
     @PostMapping("/stick")
     public String stick(@Validated({Delete.class}) @RequestBody TagVO tagVO, BindingResult result) {
         // 参数校验
@@ -102,7 +102,7 @@ public class TagRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "通过点击量排序标签")
-    @ApiOperation(value = "通过点击量排序标签", notes = "通过点击量排序标签", response = String.class)
+    @Operation(summary = "通过点击量排序标签", description ="通过点击量排序标签")
     @PostMapping("/tagSortByClickCount")
     public String tagSortByClickCount() {
         log.info("通过点击量排序标签");
@@ -117,7 +117,7 @@ public class TagRestApi {
      */
     @AuthorityVerify
     @OperationLogger(value = "通过引用量排序标签")
-    @ApiOperation(value = "通过引用量排序标签", notes = "通过引用量排序标签", response = String.class)
+    @Operation(summary = "通过引用量排序标签", description ="通过引用量排序标签")
     @PostMapping("/tagSortByCite")
     public String tagSortByCite() {
         log.info("通过引用量排序标签");

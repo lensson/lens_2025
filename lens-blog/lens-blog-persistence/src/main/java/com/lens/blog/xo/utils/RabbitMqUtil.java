@@ -1,8 +1,8 @@
 package com.lens.blog.xo.utils;
 
 
+import com.lens.blog.entity.User;
 import com.lens.blog.xo.constant.SysConstants;
-import com.lens.common.db.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

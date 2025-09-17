@@ -1,9 +1,8 @@
 package com.lens.blog.xo.service;
 
 
-
+import com.lens.blog.entity.SystemConfig;
 import com.lens.blog.vo.SystemConfigVO;
-import com.lens.common.db.entity.SystemConfig;
 import com.lens.common.db.mybatis.service.SuperService;
 
 import java.util.List;

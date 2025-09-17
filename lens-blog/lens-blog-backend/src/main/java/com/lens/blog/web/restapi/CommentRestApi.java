@@ -4,17 +4,17 @@ package com.lens.blog.web.restapi;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lens.blog.entity.*;
+import com.lens.blog.vo.CommentVO;
+import com.lens.blog.vo.UserVO;
 import com.lens.blog.web.annotion.log.BussinessLog;
 import com.lens.blog.web.constant.MessageConstants;
 import com.lens.blog.web.constant.RedisConstants;
 import com.lens.blog.web.constant.SQLConstants;
 import com.lens.blog.web.constant.SysConstants;
-
 import com.lens.blog.xo.service.*;
 import com.lens.blog.xo.utils.RabbitMqUtil;
 import com.lens.blog.xo.utils.WebUtil;
-import com.lens.blog.vo.CommentVO;
-import com.lens.blog.vo.UserVO;
 import com.lens.common.base.constant.BaseSysConstants;
 import com.lens.common.base.constant.Constants;
 import com.lens.common.base.enums.*;
@@ -26,14 +26,13 @@ import com.lens.common.base.validator.group.GetOne;
 import com.lens.common.base.validator.group.Insert;
 import com.lens.common.core.utils.ResultUtil;
 import com.lens.common.core.utils.StringUtils;
-import com.lens.common.db.entity.*;
 import com.lens.common.redis.utils.RedisUtil;
 import com.lens.common.web.feign.PictureFeignClient;
 import com.lens.common.web.holder.RequestHolder;
 import com.lens.common.web.utils.FileUtils;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -43,7 +42,6 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -57,7 +55,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RefreshScope
 @RequestMapping("/web/comment")
-@Api(value = "评论相关接口", tags = {"评论相关接口"})
+@Tag(name = "评论相关接口", description = "评论相关接口")
 @Slf4j
 public class CommentRestApi {
 
@@ -93,7 +91,7 @@ public class CommentRestApi {
      * @param result
      * @return
      */
-    @ApiOperation(value = "获取评论列表", notes = "获取评论列表")
+    @Operation(summary = "获取评论列表", description = "获取评论列表")
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class}) @RequestBody CommentVO commentVO, BindingResult result) {
 
@@ -216,7 +214,7 @@ public class CommentRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, pageList);
     }
 
-    @ApiOperation(value = "App端获取评论列表", notes = "获取评论列表")
+    @Operation(summary = "App端获取评论列表", description = "获取评论列表")
     @PostMapping("/getListByApp")
     public String getListByApp(@Validated({GetList.class}) @RequestBody CommentVO commentVO, BindingResult result) {
 
@@ -334,7 +332,7 @@ public class CommentRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, pageList);
     }
 
-    @ApiOperation(value = "获取用户的评论列表和回复", notes = "获取评论列表和回复")
+    @Operation(summary = "获取用户的评论列表和回复", description = "获取评论列表和回复")
     @PostMapping("/getListByUser")
     public String getListByUser(HttpServletRequest request, @Validated({GetList.class}) @RequestBody UserVO userVO) {
 
@@ -444,10 +442,10 @@ public class CommentRestApi {
      *
      * @return
      */
-    @ApiOperation(value = "获取用户点赞信息", notes = "增加评论")
+    @Operation(summary = "获取用户点赞信息", description = "增加评论")
     @PostMapping("/getPraiseListByUser")
-    public String getPraiseListByUser(@ApiParam(name = "currentPage", value = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
-                                      @ApiParam(name = "pageSize", value = "每页显示数目", required = false) @RequestParam(name = "pageSize", required = false, defaultValue = "10") Long pageSize) {
+    public String getPraiseListByUser(@Parameter(name = "currentPage", description = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
+                                      @Parameter(name = "pageSize", description = "每页显示数目", required = false) @RequestParam(name = "pageSize", required = false, defaultValue = "10") Long pageSize) {
         HttpServletRequest request = RequestHolder.getRequest();
         if (request.getAttribute(SysConstants.USER_UID) == null || request.getAttribute(SysConstants.TOKEN) == null) {
             return ResultUtil.result(SysConstants.ERROR, MessageConstants.INVALID_TOKEN);
@@ -487,7 +485,7 @@ public class CommentRestApi {
     }
 
     @BussinessLog(value = "发表评论", behavior = EBehavior.PUBLISH_COMMENT)
-    @ApiOperation(value = "增加评论", notes = "增加评论")
+    @Operation(summary = "增加评论", description = "增加评论")
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody CommentVO commentVO, BindingResult result) {
         ThrowableUtils.checkParamArgument(result);
@@ -642,7 +640,7 @@ public class CommentRestApi {
 
 
     @BussinessLog(value = "举报评论", behavior = EBehavior.REPORT_COMMENT)
-    @ApiOperation(value = "举报评论", notes = "举报评论")
+    @Operation(summary = "举报评论", description = "举报评论")
     @PostMapping("/report")
     public String reportComment(HttpServletRequest request, @Validated({GetOne.class}) @RequestBody CommentVO commentVO, BindingResult result) {
 
@@ -688,7 +686,7 @@ public class CommentRestApi {
      * @return
      */
     @BussinessLog(value = "删除评论", behavior = EBehavior.DELETE_COMMENT)
-    @ApiOperation(value = "删除评论", notes = "删除评论")
+    @Operation(summary = "删除评论", description = "删除评论")
     @PostMapping("/delete")
     public String deleteBatch(HttpServletRequest request, @Validated({Delete.class}) @RequestBody CommentVO commentVO, BindingResult result) {
 
@@ -735,7 +733,7 @@ public class CommentRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, MessageConstants.DELETE_SUCCESS);
     }
 
-    @ApiOperation(value = "关闭评论邮件通知", notes = "关闭评论邮件通知")
+    @Operation(summary = "关闭评论邮件通知", description = "关闭评论邮件通知")
     @GetMapping("/closeEmailNotification/{userUid}")
     public String bindUserEmail(@PathVariable("userUid") String userUid) {
 
@@ -832,7 +830,7 @@ public class CommentRestApi {
         return linkUrl;
     }
 
-    @ApiOperation(value = "获取用户收到的评论回复数", notes = "获取用户收到的评论回复数")
+    @Operation(summary = "获取用户收到的评论回复数", description = "获取用户收到的评论回复数")
     @GetMapping("/getUserReceiveCommentCount")
     public String getUserReceiveCommentCount(HttpServletRequest request) {
         log.info("获取用户收到的评论回复数");
@@ -849,7 +847,7 @@ public class CommentRestApi {
         return ResultUtil.successWithData(commentCount);
     }
 
-    @ApiOperation(value = "阅读用户接收的评论数", notes = "阅读用户接收的评论数")
+    @Operation(summary = "阅读用户接收的评论数", description = "阅读用户接收的评论数")
     @PostMapping("/readUserReceiveCommentCount")
     public String readUserReceiveCommentCount(HttpServletRequest request) {
         log.info("阅读用户接收的评论数");

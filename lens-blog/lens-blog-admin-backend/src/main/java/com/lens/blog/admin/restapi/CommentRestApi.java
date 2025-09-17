@@ -4,16 +4,16 @@ package com.lens.blog.admin.restapi;
 import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.annotion.AvoidRepeatableCommit.AvoidRepeatableCommit;
 import com.lens.blog.admin.annotion.OperationLogger.OperationLogger;
-import com.lens.blog.xo.service.CommentService;
 import com.lens.blog.vo.CommentVO;
+import com.lens.blog.xo.service.CommentService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.Delete;
 import com.lens.common.base.validator.group.GetList;
 import com.lens.common.base.validator.group.Insert;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -31,7 +31,7 @@ import java.util.List;
  * @author 陌溪
  * @since 2020年1月20日16:44:25
  */
-@Api(value = "用户评论相关接口", tags = {"用户评论相关接口"})
+@Tag(name ="用户评论相关接口", description = "用户评论相关接口")
 @RestController
 @RequestMapping("/comment")
 @Slf4j
@@ -41,7 +41,7 @@ public class CommentRestApi {
     CommentService commentService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取评论列表", notes = "获取评论列表", response = String.class)
+    @Operation(summary = "获取评论列表", description ="获取评论列表")
     @PostMapping(value = "/getList")
     public String getList(@Validated({GetList.class}) @RequestBody CommentVO commentVO, BindingResult result) {
 
@@ -53,7 +53,7 @@ public class CommentRestApi {
 
     @AvoidRepeatableCommit
     @AuthorityVerify
-    @ApiOperation(value = "增加评论", notes = "增加评论", response = String.class)
+    @Operation(summary = "增加评论", description ="增加评论")
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody CommentVO commentVO, BindingResult result) {
 
@@ -64,7 +64,7 @@ public class CommentRestApi {
     }
 
     @AuthorityVerify
-    @ApiOperation(value = "编辑评论", notes = "编辑评论", response = String.class)
+    @Operation(summary = "编辑评论", description ="编辑评论")
     @PostMapping("/edit")
     public String edit(@Validated({Update.class}) @RequestBody CommentVO commentVO, BindingResult result) {
 
@@ -75,7 +75,7 @@ public class CommentRestApi {
     }
 
     @AuthorityVerify
-    @ApiOperation(value = "删除评论", notes = "删除评论", response = String.class)
+    @Operation(summary = "删除评论", description ="删除评论")
     @PostMapping("/delete")
     public String delete(@Validated({Delete.class}) @RequestBody CommentVO commentVO, BindingResult result) {
 
@@ -87,7 +87,7 @@ public class CommentRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "删除选中评论")
-    @ApiOperation(value = "删除选中评论", notes = "删除选中评论", response = String.class)
+    @Operation(summary = "删除选中评论", description ="删除选中评论")
     @PostMapping("/deleteBatch")
     public String deleteBatch(@Validated({Delete.class}) @RequestBody List<CommentVO> commentVoList, BindingResult result) {
 

@@ -2,8 +2,9 @@ package com.lens.blog.xo.service;
 
 
 
+
+import com.lens.blog.entity.CategoryMenu;
 import com.lens.blog.vo.CategoryMenuVO;
-import com.lens.common.db.entity.CategoryMenu;
 import com.lens.common.db.mybatis.service.SuperService;
 
 import java.util.List;

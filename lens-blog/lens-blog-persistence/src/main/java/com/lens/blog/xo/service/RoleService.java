@@ -1,8 +1,8 @@
 package com.lens.blog.xo.service;
 
 
+import com.lens.blog.entity.Role;
 import com.lens.blog.vo.RoleVO;
-import com.lens.common.db.entity.Role;
 import com.lens.common.db.mybatis.service.SuperService;
 
 /**

@@ -1,8 +1,8 @@
 package com.lens.blog.xo.service;
 
 
+import com.lens.blog.entity.WebConfig;
 import com.lens.blog.vo.WebConfigVO;
-import com.lens.common.db.entity.WebConfig;
 import com.lens.common.db.mybatis.service.SuperService;
 
 /**

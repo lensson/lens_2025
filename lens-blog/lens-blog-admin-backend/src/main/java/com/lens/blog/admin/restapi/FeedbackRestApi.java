@@ -1,19 +1,18 @@
 package com.lens.blog.admin.restapi;
 
 
-
 import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.annotion.OperationLogger.OperationLogger;
 import com.lens.blog.admin.constant.SysConstants;
-import com.lens.blog.xo.service.FeedbackService;
 import com.lens.blog.vo.FeedbackVO;
+import com.lens.blog.xo.service.FeedbackService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.Delete;
 import com.lens.common.base.validator.group.GetList;
 import com.lens.common.base.validator.group.Update;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -32,7 +31,7 @@ import java.util.List;
  * @date 2020年3月16日08:38:07
  */
 @RestController
-@Api(value = "用户反馈相关接口", tags = {"用户反馈相关接口"})
+@Tag(name ="用户反馈相关接口", description = "用户反馈相关接口")
 @RequestMapping("/feedback")
 @Slf4j
 public class FeedbackRestApi {
@@ -41,7 +40,7 @@ public class FeedbackRestApi {
     FeedbackService feedbackService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取反馈列表", notes = "获取反馈列表", response = String.class)
+    @Operation(summary = "获取反馈列表", description ="获取反馈列表")
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class}) @RequestBody FeedbackVO feedbackVO, BindingResult result) {
 
@@ -53,7 +52,7 @@ public class FeedbackRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "编辑反馈")
-    @ApiOperation(value = "编辑反馈", notes = "编辑反馈", response = String.class)
+    @Operation(summary = "编辑反馈", description ="编辑反馈")
     @PostMapping("/edit")
     public String edit(@Validated({Update.class}) @RequestBody FeedbackVO feedbackVO, BindingResult result) {
 
@@ -65,7 +64,7 @@ public class FeedbackRestApi {
 
     @AuthorityVerify
     @OperationLogger(value = "批量删除反馈")
-    @ApiOperation(value = "批量删除反馈", notes = "批量删除反馈", response = String.class)
+    @Operation(summary = "批量删除反馈", description ="批量删除反馈")
     @PostMapping("/deleteBatch")
     public String delete(@Validated({Delete.class}) @RequestBody List<FeedbackVO> feedbackVOList, BindingResult result) {
 

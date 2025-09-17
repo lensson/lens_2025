@@ -1,12 +1,11 @@
 package com.lens.blog.web.restapi;
 
-
-
+import com.lens.blog.entity.Link;
+import com.lens.blog.entity.Tag;
 import com.lens.blog.web.annotion.log.BussinessLog;
 import com.lens.blog.web.annotion.requestLimit.RequestLimit;
 import com.lens.blog.web.constant.RedisConstants;
 import com.lens.blog.web.constant.SysConstants;
-
 import com.lens.blog.xo.constant.MessageConstants;
 import com.lens.blog.xo.service.*;
 import com.lens.common.base.constant.Constants;
@@ -14,12 +13,9 @@ import com.lens.common.base.enums.EBehavior;
 import com.lens.common.base.utils.JsonUtils;
 import com.lens.common.core.utils.ResultUtil;
 import com.lens.common.core.utils.StringUtils;
-import com.lens.common.db.entity.Link;
-import com.lens.common.db.entity.Tag;
 import com.lens.common.redis.utils.RedisUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +35,7 @@ import java.util.concurrent.TimeUnit;
  */
 @RestController
 @RequestMapping("/index")
-@Api(value = "首页相关接口", tags = {"首页相关接口"})
+@io.swagger.v3.oas.annotations.tags.Tag(name = "首页相关接口", description = "首页相关接口")
 @Slf4j
 public class IndexRestApi {
 
@@ -59,17 +55,17 @@ public class IndexRestApi {
     private RedisUtil redisUtil;
 
     @RequestLimit(amount = 200, time = 60000)
-    @ApiOperation(value = "通过推荐等级获取博客列表", notes = "通过推荐等级获取博客列表")
+    @Operation(summary = "通过推荐等级获取博客列表", description = "通过推荐等级获取博客列表")
     @GetMapping("/getBlogByLevel")
     public String getBlogByLevel(HttpServletRequest request,
-                                 @ApiParam(name = "level", value = "推荐等级", required = false) @RequestParam(name = "level", required = false, defaultValue = "0") Integer level,
-                                 @ApiParam(name = "currentPage", value = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
-                                 @ApiParam(name = "useSort", value = "使用排序", required = false) @RequestParam(name = "useSort", required = false, defaultValue = "0") Integer useSort) {
+                                 @Parameter(name = "level", description = "推荐等级", required = false) @RequestParam(name = "level", required = false, defaultValue = "0") Integer level,
+                                 @Parameter(name = "currentPage", description = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
+                                 @Parameter(name = "useSort", description = "使用排序", required = false) @RequestParam(name = "useSort", required = false, defaultValue = "0") Integer useSort) {
 
         return ResultUtil.result(SysConstants.SUCCESS, blogService.getBlogPageByLevel(level, currentPage, useSort));
     }
 
-    @ApiOperation(value = "获取首页排行博客", notes = "获取首页排行博客")
+    @Operation(summary = "获取首页排行博客", description = "获取首页排行博客")
     @GetMapping("/getHotBlog")
     public String getHotBlog() {
 
@@ -77,38 +73,38 @@ public class IndexRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, blogService.getHotBlog());
     }
 
-    @ApiOperation(value = "获取首页最新的博客", notes = "获取首页最新的博客")
+    @Operation(summary = "获取首页最新的博客", description = "获取首页最新的博客")
     @GetMapping("/getNewBlog")
     public String getNewBlog(HttpServletRequest request,
-                             @ApiParam(name = "currentPage", value = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
-                             @ApiParam(name = "pageSize", value = "每页显示数目", required = false) @RequestParam(name = "pageSize", required = false, defaultValue = "10") Long pageSize) {
+                             @Parameter(name = "currentPage", description = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
+                             @Parameter(name = "pageSize", description = "每页显示数目", required = false) @RequestParam(name = "pageSize", required = false, defaultValue = "10") Long pageSize) {
 
         log.info("获取首页最新的博客");
         return ResultUtil.result(SysConstants.SUCCESS, blogService.getNewBlog(currentPage, null));
     }
 
-    @ApiOperation(value = "mogu-search调用获取博客的接口[包含内容]", notes = "mogu-search调用获取博客的接口")
+    @Operation(summary = "mogu-search调用获取博客的接口[包含内容]", description = "mogu-search调用获取博客的接口")
     @GetMapping("/getBlogBySearch")
     public String getBlogBySearch(HttpServletRequest request,
-                                  @ApiParam(name = "currentPage", value = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
-                                  @ApiParam(name = "pageSize", value = "每页显示数目", required = false) @RequestParam(name = "pageSize", required = false, defaultValue = "10") Long pageSize) {
+                                  @Parameter(name = "currentPage", description = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
+                                  @Parameter(name = "pageSize", description = "每页显示数目", required = false) @RequestParam(name = "pageSize", required = false, defaultValue = "10") Long pageSize) {
 
         log.info("获取首页最新的博客");
         return ResultUtil.result(SysConstants.SUCCESS, blogService.getBlogBySearch(currentPage, null));
     }
 
 
-    @ApiOperation(value = "按时间戳获取博客", notes = "按时间戳获取博客")
+    @Operation(summary = "按时间戳获取博客", description = "按时间戳获取博客")
     @GetMapping("/getBlogByTime")
     public String getBlogByTime(HttpServletRequest request,
-                                @ApiParam(name = "currentPage", value = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
-                                @ApiParam(name = "pageSize", value = "每页显示数目", required = false) @RequestParam(name = "pageSize", required = false, defaultValue = "10") Long pageSize) {
+                                @Parameter(name = "currentPage", description = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
+                                @Parameter(name = "pageSize", description = "每页显示数目", required = false) @RequestParam(name = "pageSize", required = false, defaultValue = "10") Long pageSize) {
 
         String blogNewCount = sysParamsService.getSysParamsValueByKey(SysConstants.BLOG_NEW_COUNT);
         return ResultUtil.result(SysConstants.SUCCESS, blogService.getBlogByTime(currentPage, Long.valueOf(blogNewCount)));
     }
 
-    @ApiOperation(value = "获取最热标签", notes = "获取最热标签")
+    @Operation(summary = "获取最热标签", description = "获取最热标签")
     @GetMapping("/getHotTag")
     public String getHotTag() {
         String hotTagCount = sysParamsService.getSysParamsValueByKey(SysConstants.HOT_TAG_COUNT);
@@ -125,7 +121,7 @@ public class IndexRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, tagList);
     }
 
-    @ApiOperation(value = "获取友情链接", notes = "获取友情链接")
+    @Operation(summary = "获取友情链接", description = "获取友情链接")
     @GetMapping("/getLink")
     public String getLink() {
         String friendlyLinkCount = sysParamsService.getSysParamsValueByKey(SysConstants.FRIENDLY_LINK_COUNT);
@@ -143,21 +139,21 @@ public class IndexRestApi {
     }
 
     @BussinessLog(value = "点击友情链接", behavior = EBehavior.FRIENDSHIP_LINK)
-    @ApiOperation(value = "增加友情链接点击数", notes = "增加友情链接点击数")
+    @Operation(summary = "增加友情链接点击数", description = "增加友情链接点击数")
     @GetMapping("/addLinkCount")
-    public String addLinkCount(@ApiParam(name = "uid", value = "友情链接UID", required = false) @RequestParam(name = "uid", required = false) String uid) {
+    public String addLinkCount(@Parameter(name = "uid", description = "友情链接UID", required = false) @RequestParam(name = "uid", required = false) String uid) {
         log.info("点击友链");
         return linkService.addLinkCount(uid);
     }
 
-    @ApiOperation(value = "获取网站配置", notes = "获取友情链接")
+    @Operation(summary = "获取网站配置", description = "获取友情链接")
     @GetMapping("/getWebConfig")
     public String getWebConfig() {
         log.info("获取网站配置");
         return ResultUtil.result(SysConstants.SUCCESS, webConfigService.getWebConfigByShowList());
     }
 
-    @ApiOperation(value = "获取网站导航栏", notes = "获取网站导航栏")
+    @Operation(summary = "获取网站导航栏", description = "获取网站导航栏")
     @GetMapping("/getWebNavbar")
     public String getWebNavbar() {
         log.info("获取网站导航栏");
@@ -165,9 +161,9 @@ public class IndexRestApi {
     }
 
     @BussinessLog(value = "记录访问页面", behavior = EBehavior.VISIT_PAGE)
-    @ApiOperation(value = "记录访问页面", notes = "记录访问页面")
+    @Operation(summary = "记录访问页面", description = "记录访问页面")
     @GetMapping("/recorderVisitPage")
-    public String recorderVisitPage(@ApiParam(name = "pageName", value = "页面名称", required = false) @RequestParam(name = "pageName", required = true) String pageName) {
+    public String recorderVisitPage(@Parameter(name = "pageName", description = "页面名称", required = false) @RequestParam(name = "pageName", required = true) String pageName) {
 
         if (StringUtils.isEmpty(pageName)) {
             return ResultUtil.result(SysConstants.SUCCESS, MessageConstants.PARAM_INCORRECT);

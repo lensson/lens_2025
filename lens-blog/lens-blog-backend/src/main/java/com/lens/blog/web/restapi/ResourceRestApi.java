@@ -4,6 +4,8 @@ package com.lens.blog.web.restapi;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lens.blog.entity.ResourceSort;
+import com.lens.blog.entity.StudyVideo;
 import com.lens.blog.web.constant.SQLConstants;
 import com.lens.blog.web.constant.SysConstants;
 import com.lens.blog.xo.service.ResourceSortService;
@@ -12,12 +14,10 @@ import com.lens.blog.xo.utils.WebUtil;
 import com.lens.common.base.enums.EStatus;
 import com.lens.common.core.utils.ResultUtil;
 import com.lens.common.core.utils.StringUtils;
-import com.lens.common.db.entity.ResourceSort;
-import com.lens.common.db.entity.StudyVideo;
 import com.lens.common.web.feign.PictureFeignClient;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
@@ -38,7 +37,7 @@ import java.util.*;
  */
 @RestController
 @RequestMapping("/resource")
-@Api(value = "学习教程相关接口", tags = {"学习教程相关接口"})
+@Tag(name = "学习教程相关接口", description = "学习教程相关接口")
 @Slf4j
 public class ResourceRestApi {
     @Autowired
@@ -50,12 +49,12 @@ public class ResourceRestApi {
     @Resource
     private PictureFeignClient pictureFeignClient;
 
-    @ApiOperation(value = "通过分类来获取视频", notes = "通过Uid获取博客内容")
+    @Operation(summary = "通过分类来获取视频", description = "通过Uid获取博客内容")
     @GetMapping("/getStudyVideoBySort")
     public String getBlogByUid(HttpServletRequest request,
-                               @ApiParam(name = "resourceSortUid", value = "资源分类UID", required = false) @RequestParam(name = "resourceSortUid", required = false) String resourceSortUid,
-                               @ApiParam(name = "currentPage", value = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
-                               @ApiParam(name = "pageSize", value = "每页显示数目", required = false) @RequestParam(name = "pageSize", required = false, defaultValue = "8") Long pageSize) {
+                               @Parameter(name = "resourceSortUid", description = "资源分类UID", required = false) @RequestParam(name = "resourceSortUid", required = false) String resourceSortUid,
+                               @Parameter(name = "currentPage", description = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
+                               @Parameter(name = "pageSize", description = "每页显示数目", required = false) @RequestParam(name = "pageSize", required = false, defaultValue = "8") Long pageSize) {
 
         QueryWrapper<StudyVideo> queryWrapper = new QueryWrapper<>();
         Page<StudyVideo> page = new Page<>();

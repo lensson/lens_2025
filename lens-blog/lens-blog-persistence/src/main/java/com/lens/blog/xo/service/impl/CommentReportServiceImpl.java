@@ -1,9 +1,9 @@
 package com.lens.blog.xo.service.impl;
 
 
-import com.lens.blog.mapper.CommentReportMapper;
+import com.lens.blog.entity.CommentReport;
+import com.lens.blog.xo.mapper.CommentReportMapper;
 import com.lens.blog.xo.service.CommentReportService;
-import com.lens.common.db.entity.CommentReport;
 import com.lens.common.db.mybatis.serviceImpl.SuperServiceImpl;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,8 @@
 package com.lens.blog.xo.service;
 
+
+import com.lens.blog.entity.Admin;
 import com.lens.blog.vo.AdminVO;
-import com.lens.common.db.entity.Admin;
 import com.lens.common.db.mybatis.service.SuperService;
 
 import java.util.List;

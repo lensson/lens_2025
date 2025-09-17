@@ -1,18 +1,17 @@
 package com.lens.blog.admin.restapi;
 
 
-
 import com.lens.blog.admin.annotion.AuthorityVerify.AuthorityVerify;
 import com.lens.blog.admin.constant.SysConstants;
-import com.lens.blog.xo.service.ExceptionLogService;
-import com.lens.blog.xo.service.SysLogService;
 import com.lens.blog.vo.ExceptionLogVO;
 import com.lens.blog.vo.SysLogVO;
+import com.lens.blog.xo.service.ExceptionLogService;
+import com.lens.blog.xo.service.SysLogService;
 import com.lens.common.base.exception.ThrowableUtils;
 import com.lens.common.base.validator.group.GetList;
 import com.lens.common.core.utils.ResultUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -29,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @since 2018年9月24日15:45:18
  */
 @RestController
-@Api(value = "操作日志相关接口", tags = {"操作日志相关接口"})
+@Tag(name ="操作日志相关接口", description = "操作日志相关接口")
 @RequestMapping("/log")
 @Slf4j
 public class LogRestApi {
@@ -40,7 +39,7 @@ public class LogRestApi {
     private ExceptionLogService exceptionLogService;
 
     @AuthorityVerify
-    @ApiOperation(value = "获取操作日志列表", notes = "获取操作日志列表", response = String.class)
+    @Operation(summary = "获取操作日志列表", description ="获取操作日志列表")
     @PostMapping(value = "/getLogList")
     public String getLogList(@Validated({GetList.class}) @RequestBody SysLogVO sysLogVO, BindingResult result) {
 
@@ -50,7 +49,7 @@ public class LogRestApi {
     }
 
     @AuthorityVerify
-    @ApiOperation(value = "获取系统异常列表", notes = "获取系统异常列表", response = String.class)
+    @Operation(summary = "获取系统异常列表", description ="获取系统异常列表")
     @PostMapping(value = "/getExceptionList")
     public String getExceptionList(@Validated({GetList.class}) @RequestBody ExceptionLogVO exceptionLogVO, BindingResult result) {
 

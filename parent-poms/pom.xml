@@ -30,7 +30,7 @@
         <hutool.version>5.3.5</hutool.version>
         <lombok.version>1.18.28</lombok.version>
 
-        <pagehelper.version>2.1.0</pagehelper.version>
+        <pagehelper.version>2.1.1</pagehelper.version>
 
         <!-- JSON alibaba -->
         <alibaba.fastjson.version>2.0.57</alibaba.fastjson.version>
@@ -67,6 +67,7 @@
 
         <!-- spring mybatis -->
         <mybatis-plus-boot-starter.version>3.5.10</mybatis-plus-boot-starter.version>
+        <mybatis.version>3.5.19</mybatis.version>
 
         <!-- docker -->
         <docker.image.prefix>lensson</docker.image.prefix>
@@ -164,6 +165,24 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-spring-boot3-starter</artifactId>
+                <version>3.5.10</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis-spring</artifactId>
+                <version>3.0.3</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>${mybatis.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

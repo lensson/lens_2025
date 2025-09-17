@@ -4,11 +4,10 @@ package com.lens.blog.web.restapi;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.lens.blog.entity.Blog;
 import com.lens.blog.web.annotion.log.BussinessLog;
-
 import com.lens.blog.web.constant.RedisConstants;
 import com.lens.blog.web.constant.SysConstants;
-
 import com.lens.blog.xo.constant.MessageConstants;
 import com.lens.blog.xo.service.BlogService;
 import com.lens.blog.xo.utils.WebUtil;
@@ -20,12 +19,11 @@ import com.lens.common.base.enums.EStatus;
 import com.lens.common.core.utils.IpUtils;
 import com.lens.common.core.utils.ResultUtil;
 import com.lens.common.core.utils.StringUtils;
-import com.lens.common.db.entity.Blog;
 import com.lens.common.web.feign.PictureFeignClient;
 import com.lens.common.web.holder.RequestHolder;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -37,7 +35,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -51,7 +48,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @RefreshScope
 @RequestMapping("/content")
-@Api(value = "文章详情相关接口", tags = {"文章详情相关接口"})
+@Tag(name = "文章详情相关接口", description = "文章详情相关接口")
 @Slf4j
 public class BlogContentRestApi {
     @Autowired
@@ -68,10 +65,10 @@ public class BlogContentRestApi {
     private String REPRINTED_TEMPLATE;
 
     @BussinessLog(value = "点击博客", behavior = EBehavior.BLOG_CONTNET)
-    @ApiOperation(value = "通过Uid获取博客内容", notes = "通过Uid获取博客内容")
+    @Operation(summary = "通过Uid获取博客内容", description = "通过Uid获取博客内容")
     @GetMapping("/getBlogByUid")
-    public String getBlogByUid(@ApiParam(name = "uid", value = "博客UID", required = false) @RequestParam(name = "uid", required = false) String uid,
-                               @ApiParam(name = "oid", value = "博客OID", required = false) @RequestParam(name = "oid", required = false, defaultValue = "0") Integer oid) {
+    public String getBlogByUid(@Parameter(name = "uid", description = "博客UID", required = false) @RequestParam(name = "uid", required = false) String uid,
+                               @Parameter(name = "oid", description = "博客OID", required = false) @RequestParam(name = "oid", required = false, defaultValue = "0") Integer oid) {
 
         HttpServletRequest request = RequestHolder.getRequest();
         String ip = IpUtils.getIpAddr(request);
@@ -121,37 +118,37 @@ public class BlogContentRestApi {
         return ResultUtil.result(SysConstants.SUCCESS, blog);
     }
 
-    @ApiOperation(value = "通过Uid获取博客点赞数", notes = "通过Uid获取博客点赞数")
+    @Operation(summary = "通过Uid获取博客点赞数", description = "通过Uid获取博客点赞数")
     @GetMapping("/getBlogPraiseCountByUid")
-    public String getBlogPraiseCountByUid(@ApiParam(name = "uid", value = "博客UID", required = false) @RequestParam(name = "uid", required = false) String uid) {
+    public String getBlogPraiseCountByUid(@Parameter(name = "uid", description = "博客UID", required = false) @RequestParam(name = "uid", required = false) String uid) {
 
         return ResultUtil.result(SysConstants.SUCCESS, blogService.getBlogPraiseCountByUid(uid));
     }
 
     @BussinessLog(value = "通过Uid给博客点赞", behavior = EBehavior.BLOG_PRAISE)
-    @ApiOperation(value = "通过Uid给博客点赞", notes = "通过Uid给博客点赞")
+    @Operation(summary = "通过Uid给博客点赞", description = "通过Uid给博客点赞")
     @GetMapping("/praiseBlogByUid")
-    public String praiseBlogByUid(@ApiParam(name = "uid", value = "博客UID", required = false) @RequestParam(name = "uid", required = false) String uid) {
+    public String praiseBlogByUid(@Parameter(name = "uid", description = "博客UID", required = false) @RequestParam(name = "uid", required = false) String uid) {
         if (StringUtils.isEmpty(uid)) {
             return ResultUtil.result(SysConstants.ERROR, MessageConstants.PARAM_INCORRECT);
         }
         return blogService.praiseBlogByUid(uid);
     }
 
-    @ApiOperation(value = "根据标签Uid获取相关的博客", notes = "根据标签获取相关的博客")
+    @Operation(summary = "根据标签Uid获取相关的博客", description = "根据标签获取相关的博客")
     @GetMapping("/getSameBlogByTagUid")
-    public String getSameBlogByTagUid(@ApiParam(name = "tagUid", value = "博客标签UID", required = true) @RequestParam(name = "tagUid", required = true) String tagUid,
-                                      @ApiParam(name = "currentPage", value = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
-                                      @ApiParam(name = "pageSize", value = "每页显示数目", required = false) @RequestParam(name = "pageSize", required = false, defaultValue = "10") Long pageSize) {
+    public String getSameBlogByTagUid(@Parameter(name = "tagUid", description = "博客标签UID", required = true) @RequestParam(name = "tagUid", required = true) String tagUid,
+                                      @Parameter(name = "currentPage", description = "当前页数", required = false) @RequestParam(name = "currentPage", required = false, defaultValue = "1") Long currentPage,
+                                      @Parameter(name = "pageSize", description = "每页显示数目", required = false) @RequestParam(name = "pageSize", required = false, defaultValue = "10") Long pageSize) {
         if (StringUtils.isEmpty(tagUid)) {
             return ResultUtil.result(SysConstants.ERROR, MessageConstants.PARAM_INCORRECT);
         }
         return ResultUtil.result(SysConstants.SUCCESS, blogService.getSameBlogByTagUid(tagUid));
     }
 
-    @ApiOperation(value = "根据BlogUid获取相关的博客", notes = "根据BlogUid获取相关的博客")
+    @Operation(summary = "根据BlogUid获取相关的博客", description = "根据BlogUid获取相关的博客")
     @GetMapping("/getSameBlogByBlogUid")
-    public String getSameBlogByBlogUid(@ApiParam(name = "blogUid", value = "博客标签UID", required = true) @RequestParam(name = "blogUid", required = true) String blogUid) {
+    public String getSameBlogByBlogUid(@Parameter(name = "blogUid", description = "博客标签UID", required = true) @RequestParam(name = "blogUid", required = true) String blogUid) {
         if (StringUtils.isEmpty(blogUid)) {
             return ResultUtil.result(SysConstants.ERROR, MessageConstants.PARAM_INCORRECT);
         }

@@ -1,6 +1,7 @@
 package com.lens.blog.xo.utils;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.lens.blog.entity.SystemConfig;
 import com.lens.blog.xo.constant.MessageConstants;
 import com.lens.blog.xo.constant.RedisConstants;
 import com.lens.blog.xo.constant.SQLConstants;
@@ -11,9 +12,7 @@ import com.lens.common.base.enums.EFilePriority;
 import com.lens.common.base.enums.EStatus;
 import com.lens.common.base.exception.exceptionType.QueryException;
 import com.lens.common.base.utils.JsonUtils;
-import com.lens.common.db.entity.SystemConfig;
 import com.lens.common.redis.utils.RedisUtil;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
